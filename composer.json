@@ -1,0 +1,82 @@
+{
+    "name": "ideal-postcodes/sdk",
+    "description": "PHP client for the Ideal Postcodes API: UK and international address search, postcode lookup, address cleanse and key management",
+    "type": "library",
+    "keywords": [
+        "ideal postcodes",
+        "address",
+        "postcode",
+        "postcode lookup",
+        "address finder",
+        "uk",
+        "sdk",
+        "api"
+    ],
+    "homepage": "https://ideal-postcodes.co.uk",
+    "license": "SEE LICENSE IN LICENSE",
+    "authors": [
+        {
+            "name": "Ideal Postcodes",
+            "email": "support@ideal-postcodes.co.uk",
+            "homepage": "https://ideal-postcodes.co.uk"
+        }
+    ],
+    "support": {
+        "email": "support@ideal-postcodes.co.uk",
+        "docs": "https://docs.ideal-postcodes.co.uk/docs/sdks/php",
+        "issues": "https://github.com/ideal-postcodes/feedback/issues"
+    },
+    "require": {
+        "php": "^8.2",
+        "ext-json": "*",
+        "php-http/discovery": "^1.20",
+        "psr/http-client": "^1.0",
+        "psr/http-client-implementation": "^1.0",
+        "psr/http-factory": "^1.0",
+        "psr/http-factory-implementation": "^1.0",
+        "psr/http-message": "^1.1 || ^2.0"
+    },
+    "require-dev": {
+        "guzzlehttp/guzzle": "^7.9",
+        "guzzlehttp/psr7": "^2.7",
+        "laravel/pint": "^1.21",
+        "pestphp/pest": "^3.8",
+        "php-http/mock-client": "^1.6",
+        "phpstan/phpstan": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "IdealPostcodes\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "IdealPostcodes\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        }
+    },
+    "scripts": {
+        "generate": "@php scripts/generate.php",
+        "lint": "pint --test",
+        "lint:fix": "pint",
+        "test:types": [
+            "phpstan analyse --memory-limit=512M",
+            "phpstan analyse --memory-limit=512M -c phpstan.tests.neon.dist"
+        ],
+        "test:unit": "pest --colors=always",
+        "test:live": "pest --colors=always --group=live",
+        "test": [
+            "@lint",
+            "@test:types",
+            "@test:unit"
+        ]
+    }
+}
