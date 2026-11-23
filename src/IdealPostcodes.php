@@ -7,7 +7,7 @@ namespace IdealPostcodes;
 final class IdealPostcodes
 {
     /** The SDK version, sent as the User-Agent. */
-    public const VERSION = '0.1.0'; // x-release-please-version
+    public const VERSION = '0.1.1'; // x-release-please-version
 
     /**
      * The SDK and PHP versions, as sent in the User-Agent.
