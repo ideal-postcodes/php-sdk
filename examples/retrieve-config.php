@@ -8,6 +8,6 @@ require __DIR__.'/../vendor/autoload.php';
 
 $client = IdealPostcodes::client('ak_test');
 
-$response = $client->configs()->retrieve('ak_test', 'woocommerce');
+$response = $client->retrieveConfig('ak_test', 'woocommerce');
 
 echo $response->result->payload, PHP_EOL;

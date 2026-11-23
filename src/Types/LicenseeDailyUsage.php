@@ -14,7 +14,7 @@ use IdealPostcodes\Contracts\ResponseContract;
 /**
  * LicenseeDaily
  *
- * @phpstan-type LicenseeDailyUsageArray array{count: int, updatedAt: string}
+ * @phpstan-type LicenseeDailyUsageArray array{limit: int|null, count: int, updatedAt: string}
  *
  * @implements ResponseContract<LicenseeDailyUsageArray>
  */
@@ -24,6 +24,10 @@ final class LicenseeDailyUsage implements ResponseContract
     use ArrayAccessible;
 
     private function __construct(
+        /**
+         * The maximum number of lookups this licensee can perform in a day. `null` indicates the limit is not active
+         */
+        public readonly ?int $limit,
         /**
          * The number of lookups performed by the licensee on the day represented by `licensees.daily.updatedAt`
          */
@@ -40,14 +44,16 @@ final class LicenseeDailyUsage implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            count: $attributes['count'],
-            updatedAt: $attributes['updatedAt'],
+            limit: $attributes['limit'] ?? null,
+            count: $attributes['count'] ?? throw self::missing('count'),
+            updatedAt: $attributes['updatedAt'] ?? throw self::missing('updatedAt'),
         );
     }
 
     public function toArray(): array
     {
         return [
+            'limit' => $this->limit,
             'count' => $this->count,
             'updatedAt' => $this->updatedAt,
         ];

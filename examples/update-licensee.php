@@ -8,7 +8,7 @@ require __DIR__.'/../vendor/autoload.php';
 
 $client = IdealPostcodes::client('ak_test', 'uk_test');
 
-$response = $client->licensees()->update('ak_test', '56a11209ebe230380bf104c3', [
+$response = $client->updateLicensee('ak_test', '56a11209ebe230380bf104c3', [
     'name' => 'Acme Limited',
 ]);
 

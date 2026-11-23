@@ -25,11 +25,11 @@ final class Config implements ResponseContract
 
     private function __construct(
         /**
-         * Timestamp for when the config was created
+         * Timestamp for when the config was last updated
          */
         public readonly string $updatedAt,
         /**
-         * Timestamp for when the config was updated
+         * Timestamp for when the config was created
          */
         public readonly string $createdAt,
         /**
@@ -48,10 +48,10 @@ final class Config implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            updatedAt: $attributes['updatedAt'],
-            createdAt: $attributes['createdAt'],
-            name: $attributes['name'],
-            payload: $attributes['payload'],
+            updatedAt: $attributes['updatedAt'] ?? throw self::missing('updatedAt'),
+            createdAt: $attributes['createdAt'] ?? throw self::missing('createdAt'),
+            name: $attributes['name'] ?? throw self::missing('name'),
+            payload: $attributes['payload'] ?? throw self::missing('payload'),
         );
     }
 

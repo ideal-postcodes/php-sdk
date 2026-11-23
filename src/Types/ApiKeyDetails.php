@@ -99,20 +99,20 @@ final class ApiKeyDetails implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            name: $attributes['name'],
-            contexts: array_map(static fn ($item) => AvailableContext::from($item), $attributes['contexts']),
-            lookupsRemaining: $attributes['lookups_remaining'],
-            dailyLimit: ApiKeyDailyLimit::from($attributes['daily_limit']),
-            monthlyLimit: ApiKeyMonthlyLimit::from($attributes['monthly_limit']),
-            individualLimit: ApiKeyIndividualLimit::from($attributes['individual_limit']),
-            allowedUrls: $attributes['allowed_urls'],
-            redactDays: $attributes['redact_days'],
-            notifications: ApiKeyNotifications::from($attributes['notifications']),
-            datasets: ApiKeyDatasets::from($attributes['datasets']),
-            automatedTopups: ApiKeyAutomatedTopup::from($attributes['automated_topups']),
-            currentPurchases: array_map(static fn ($item) => ApiKeyCurrentPurchase::from($item), $attributes['current_purchases']),
-            ipForwarding: $attributes['ip_forwarding'],
-            premierSupport: $attributes['premier_support'],
+            name: $attributes['name'] ?? throw self::missing('name'),
+            contexts: array_map(static fn ($item) => AvailableContext::from($item), ($attributes['contexts'] ?? throw self::missing('contexts'))),
+            lookupsRemaining: $attributes['lookups_remaining'] ?? throw self::missing('lookups_remaining'),
+            dailyLimit: ApiKeyDailyLimit::from(($attributes['daily_limit'] ?? throw self::missing('daily_limit'))),
+            monthlyLimit: ApiKeyMonthlyLimit::from(($attributes['monthly_limit'] ?? throw self::missing('monthly_limit'))),
+            individualLimit: ApiKeyIndividualLimit::from(($attributes['individual_limit'] ?? throw self::missing('individual_limit'))),
+            allowedUrls: $attributes['allowed_urls'] ?? throw self::missing('allowed_urls'),
+            redactDays: $attributes['redact_days'] ?? throw self::missing('redact_days'),
+            notifications: ApiKeyNotifications::from(($attributes['notifications'] ?? throw self::missing('notifications'))),
+            datasets: ApiKeyDatasets::from(($attributes['datasets'] ?? throw self::missing('datasets'))),
+            automatedTopups: ApiKeyAutomatedTopup::from(($attributes['automated_topups'] ?? throw self::missing('automated_topups'))),
+            currentPurchases: array_map(static fn ($item) => ApiKeyCurrentPurchase::from($item), ($attributes['current_purchases'] ?? throw self::missing('current_purchases'))),
+            ipForwarding: $attributes['ip_forwarding'] ?? throw self::missing('ip_forwarding'),
+            premierSupport: $attributes['premier_support'] ?? throw self::missing('premier_support'),
         );
     }
 

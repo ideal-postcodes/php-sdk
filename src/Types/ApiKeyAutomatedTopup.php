@@ -38,7 +38,7 @@ final class ApiKeyAutomatedTopup implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            enabled: $attributes['enabled'],
+            enabled: $attributes['enabled'] ?? throw self::missing('enabled'),
         );
     }
 

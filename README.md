@@ -13,18 +13,18 @@ use IdealPostcodes\IdealPostcodes;
 
 $client = IdealPostcodes::client('ak_test');
 
-$lookup = $client->postcodes()->lookup('SW1A 2AA');
+$lookup = $client->lookup('BR8 7RE');
 foreach ($lookup->addresses as $address) {
     echo $address->line1, ', ', $address->postTown, ', ', $address->postcode, PHP_EOL;
 }
 
-$response = $client->autocomplete()->find('9 Malyons Road');
+$response = $client->findAddress(['query' => '9 Malyons Road']);
 foreach ($response->result->hits as $hit) {
     echo $hit->suggestion, PHP_EOL;
 }
 ```
 
-Every response is a read-only object with camelCase properties, the API's own field names through array access and `toArray()` for the decoded body. An HTTP error throws `ApiException`, with the HTTP status from `getStatusCode()` and the API error code from `getCode()`.
+Each API operation is one method on the client, named from its operation ID, such as `postcodes()`, `addressCleanse()` or `keyUsage()`. Every response is a read-only object with camelCase properties, the API's own field names through array access and `toArray()` for the decoded body. An HTTP error throws `ApiException`, with the HTTP status from `getStatusCode()` and the API error code from `getCode()`.
 
 Key, licensee and configuration operations take your Management Key as the second argument to `IdealPostcodes::client()`. Keep it on your server.
 

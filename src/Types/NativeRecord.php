@@ -70,109 +70,74 @@ final class NativeRecord
      */
     public static function from(array $value): PafAddress|MrAddress|NybAddress|PafaAddress|PafwAddress|AbAddress|AbpAddress|UspsAddress|EcadAddress|EcafAddress|HereAddress|GnafAddress|KadasterAddress|KartverketAddress|SdfiAddress|CannarAddress|FodbosaAddress|MoisAddress|UpujpAddress|BevAddress|BanAddress|SwtAddress|array
     {
-        if (self::matches($value, ['dataset' => ['upujp'], 'country' => ['Japan'], 'country_iso' => ['JPN'], 'country_iso_2' => ['JP'], 'language' => ['ja', 'en'], 'script' => ['Hani', 'Hira', 'Latn']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'language', 'script', 'address', 'line_1', 'building_name', 'neighbourhood', 'district', 'city', 'prefecture', 'postcode', 'latitude', 'longitude', 'org_id', 'org_type_ind', 'org_sub_type_ind', 'org_loc_id', 'org_dis_id', 'org_nei_id', 'org_org_id', 'org_name', 'org_name_trans', 'org_loc_sfx', 'org_loc_sfx_trans', 'org_adr', 'org_adr_trans', 'org_po_ind', 'org_po_start', 'org_po_end', 'org_dsc', 'org_dsc_trans', 'org_pcode', 'org_pcode_fin', 'org_script', 'org_language', 'str_id', 'str_key', 'str_loc_id', 'str_dis_id', 'str_nei_id', 'str_org_id', 'str_pfx', 'str_pfx_trans', 'str_qlf_pre', 'str_qlf_pre_trans', 'str_qlf_suc', 'str_qlf_suc_trans', 'str_name', 'str_name_trans', 'str_loc_sfx', 'str_loc_sfx_trans', 'str_type', 'str_type_trans', 'str_type_abv', 'str_type_abv_trans', 'str_adr_num_key', 'str_from_num', 'str_from_unit', 'str_from_alph', 'str_to_num', 'str_to_unit', 'str_to_alph', 'str_evenodd', 'str_dsc', 'str_dsc_trans', 'str_blg_id', 'str_blg_name', 'str_blg_name_trans', 'str_blg_type', 'str_blg_type_trans', 'str_blg_dsc', 'str_blg_dsc_trans', 'str_ref_str_id', 'str_pcode', 'str_script', 'str_language', 'sub_dis_id', 'sub_dis_key', 'sub_loc_id', 'sub_loc_sfx', 'sub_loc_sfx_trans', 'sub_dis_name', 'sub_dis_name_trans', 'sub_dis_sfx', 'sub_dis_sfx_trans', 'sub_dis_dsc', 'sub_dis_dsc_trans', 'sub_dis_pcode', 'sub_dis_pcode_fin', 'sub_nei_id', 'sub_nei_key', 'sub_nei_name', 'sub_nei_name_trans', 'sub_nei_sfx', 'sub_nei_sfx_trans', 'sub_nei_zone_from', 'sub_nei_zone_to', 'sub_nei_dsc', 'sub_nei_dsc_trans', 'sub_nei_pcode', 'sub_script', 'sub_language', 'loc_id', 'loc_key', 'loc_adm1_id', 'loc_adm1_key', 'loc_adm1_name', 'loc_adm1_name_trans', 'loc_adm1_sfx', 'loc_adm1_sfx_trans', 'loc_adm1_abv', 'loc_adm1_abv_trans', 'loc_adm2_id', 'loc_adm2_key', 'loc_adm2_name', 'loc_adm2_name_trans', 'loc_adm2_sfx', 'loc_adm2_sfx_trans', 'loc_adm2_abv', 'loc_adm2_abv_trans', 'loc_adm3_id', 'loc_adm3_key', 'loc_adm3_name', 'loc_adm3_name_trans', 'loc_adm3_sfx', 'loc_adm3_sfx_trans', 'loc_adm3_abv', 'loc_adm3_abv_trans', 'loc_name', 'loc_name_trans', 'loc_sfx', 'loc_sfx_trans', 'loc_pcode', 'loc_pcode_fin', 'loc_dsc', 'loc_dsc_trans', 'loc_script', 'loc_language'])) {
-            /** @var UpujpAddressArray $variant */
+        if (self::matches($value, ['dataset' => ['paf']], ['dataset', 'postcode', 'post_town', 'dependant_locality', 'double_dependant_locality', 'thoroughfare', 'dependant_thoroughfare', 'building_number', 'building_name', 'sub_building_name', 'department_name', 'organisation_name', 'udprn', 'postcode_type', 'su_organisation_indicator', 'delivery_point_suffix', 'po_box'])) {
+            /** @var PafAddressArray $variant */
             $variant = $value;
 
-            return UpujpAddress::from($variant);
+            return PafAddress::from($variant);
         }
 
-        if (self::matches($value, ['dataset' => ['sdfi'], 'country' => ['Denmark'], 'country_iso' => ['DNK'], 'country_iso_2' => ['DK'], 'language' => ['da']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'address', 'line_1', 'line_2', 'language', 'latitude', 'longitude', 'adresse_id', 'kvhx', 'kvh', 'adgangsadresse', 'status', 'darstatus', 'oprettet', 'ændret', 'ikrafttrædelse', 'nedlagt', 'vejkode', 'vejnavn', 'adresseringsvejnavn', 'husnr', 'etage', 'dør', 'supplerendebynavn_dagi_id', 'supplerendebynavn', 'postnr', 'postnrnavn', 'stormodtagerpostnr', 'stormodtagerpostnrnavn', 'betegnelse', 'adressepunktændringsdato', 'etrs89koordinat_øst', 'etrs89koordinat_nord', 'wgs84koordinat_bredde', 'wgs84koordinat_længde', 'højde', 'nøjagtighed', 'kilde', 'tekniskstandard', 'tekstretning', 'ddkn_m100', 'ddkn_km1', 'ddkn_km10', 'kommunekode', 'kommunenavn', 'landsdelsnuts3', 'landsdelsnavn', 'regionskode', 'regionsnavn', 'afstemningsområdenummer', 'afstemningsområdenavn', 'menighedsrådsafstemningsområdenummer', 'menighedsrådsafstemningsområdenavn', 'opstillingskredskode', 'opstillingskredsnavn', 'storkredsnummer', 'storkredsnavn', 'valglandsdelsbogstav', 'valglandsdelsnavn', 'sognekode', 'sognenavn', 'politikredskode', 'politikredsnavn', 'retskredskode', 'retskredsnavn', 'jordstykke_ejerlavkode', 'jordstykke_ejerlavnavn', 'jordstykke_matrikelnr', 'jordstykke_esrejendomsnr', 'ejerlavkode', 'ejerlavnavn', 'matrikelnr', 'esrejendomsnr', 'zone', 'brofast', 'adgangsadresseid', 'adgangspunktid', 'navngivenvej_id', 'adgangsadresse_status', 'adgangsadresse_darstatus', 'adgangsadresse_oprettet', 'adgangsadresse_ændret', 'adgangsadresse_ikrafttrædelse', 'adgangsadresse_nedlagt', 'vejpunkt_id', 'vejpunkt_ændret', 'vejpunkt_kilde', 'vejpunkt_nøjagtighed', 'vejpunkt_tekniskstandard', 'vejpunkt_x', 'vejpunkt_y'])) {
-            /** @var SdfiAddressArray $variant */
+        if (self::matches($value, ['dataset' => ['mr']], ['dataset', 'postcode', 'post_town', 'dependant_locality', 'double_dependant_locality', 'thoroughfare', 'dependant_thoroughfare', 'building_number', 'building_name', 'sub_building_name', 'department_name', 'organisation_name', 'udprn', 'postcode_type', 'su_organisation_indicator', 'delivery_point_suffix', 'umprn'])) {
+            /** @var MrAddressArray $variant */
             $variant = $value;
 
-            return SdfiAddress::from($variant);
+            return MrAddress::from($variant);
         }
 
-        if (self::matches($value, ['dataset' => ['gnaf'], 'country' => ['Australia', 'Cocos (Keeling) Islands', 'Christmas Island', 'Norfolk Island'], 'country_iso' => ['AUS', 'CCK', 'CXR', 'NFK'], 'country_iso_2' => ['AU', 'CC', 'CX', 'NF'], 'language' => ['en']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'line_1', 'line_2', 'language', 'address', 'latitude', 'longitude', 'address_detail_pid', 'date_created', 'date_last_modified', 'date_retired', 'building_name', 'lot_number_prefix', 'lot_number', 'lot_number_suffix', 'flat_type_code', 'flat_number_prefix', 'flat_number', 'flat_number_suffix', 'level_type_code', 'level_number_prefix', 'level_number', 'level_number_suffix', 'number_first_prefix', 'number_first', 'number_first_suffix', 'number_last_prefix', 'number_last', 'number_last_suffix', 'street_locality_pid', 'alias_principal', 'postcode', 'private_street', 'legal_parcel_id', 'confidence', 'level_geocoded_code', 'primary_secondary', 'alias_type_code', 'geocode_type_code', 'default_latitude', 'default_longitude', 'address_change_type_code', 'mb_2016_match_code', 'mb_2021_match_code', 'address_type', 'address_site_name', 'geocode_site_name', 'site_geocode_type_code', 'reliability_code', 'site_boundary_extent', 'site_planimetric_accuracy', 'elevation', 'site_longitude', 'site_latitude', 'geocode_type_priority_order', 'site_geocode_priority_order', 'locality_name', 'primary_postcode', 'locality_class_code', 'locality_gnaf_reliability_code', 'locality_alias_name', 'locality_alias_postcode', 'locality_alias_type_code', 'locality_planimetric_accuracy', 'locality_latitude', 'locality_longitude', 'mb_2016_code', 'mb_2021_code', 'ps_join_type_code', 'state_name', 'state_abbreviation', 'street_class_code', 'street_name', 'street_type_code', 'street_suffix_code', 'gnaf_street_confidence', 'street_locality_gnaf_reliability_code', 'street_locality_alias_street_name', 'street_locality_alias_street_type_code', 'street_locality_alias_street_suffix_code', 'street_locality_alias_type_code', 'street_locality_boundary_extent', 'street_locality_planimetric_accuracy', 'street_locality_latitude', 'street_locality_longitude', 'street_type_name', 'street_locality_alias_street_type_name'])) {
-            /** @var GnafAddressArray $variant */
+        if (self::matches($value, ['dataset' => ['nyb']], ['dataset', 'postcode', 'post_town', 'dependant_locality', 'double_dependant_locality', 'thoroughfare', 'dependant_thoroughfare', 'building_number', 'building_name', 'sub_building_name', 'department_name', 'organisation_name', 'udprn', 'postcode_type', 'su_organisation_indicator', 'delivery_point_suffix', 'po_box'])) {
+            /** @var NybAddressArray $variant */
             $variant = $value;
 
-            return GnafAddress::from($variant);
+            return NybAddress::from($variant);
         }
 
-        if (self::matches($value, ['dataset' => ['mois'], 'country' => ['South Korea'], 'country_iso' => ['KOR'], 'country_iso_2' => ['KR'], 'language' => ['ko']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'language', 'address', 'line_1', 'line_2', 'city', 'province', '법정읍면동명', '법정동코드', '법정리명', '비고1', '비고2', '변동전도로명주소', '변경이력정보', '변경이력사유', '변경전_도로명주소', '변경사유', '변경사유코드', '층일련번호', '층명칭', '대표지번여부', '대표여부', '다량배달처명', '동일련번호', '동명칭', '도로명', '도로명_로마자', '도로명번호', '도로명코드', '도로명코드_고시일자', '도로명코드_말소일자', '읍면동구분', '읍면동일련번호', '읍면동코드', '읍면동명', '읍면동명_로마자', '건축물대장_건물명', '건물본번', '건물부번', '건물관리번호', '기초구역번호', '공동주택여부', '고시일자', '관리번호', '행정동코드', '행정동명', '호일련번호', '호명칭', '호접미사일련번호', '호접미사명칭', '이동사유코드', '일련번호', '지번일련번호', '지번본번_번지', '지번부번_호', '지하구분', '지하여부', '산여부', '상위도로명', '상위도로명번호', '상세건물명', '상세주소_부여여부', '상세주소여부', '사용여부', '시도명', '시도명_로마자', '시군구_건물명', '시군구코드', '시군구명', '시군구명_로마자', '시군구용_건물명', '우편일련번호', '우편번호', '우편번호_일련번호', '영문_법정리명', '영문읍면동명', '영문_법정읍면동명', '영문도로명', '영문시도명', '영문시군구명'])) {
-            /** @var MoisAddressArray $variant */
+        if (self::matches($value, ['dataset' => ['pafa']], ['dataset', 'postcode', 'post_town', 'dependant_locality', 'double_dependant_locality', 'thoroughfare', 'dependant_thoroughfare', 'building_number', 'building_name', 'sub_building_name', 'department_name', 'organisation_name', 'udprn', 'postcode_type', 'su_organisation_indicator', 'delivery_point_suffix', 'po_box'])) {
+            /** @var PafaAddressArray $variant */
             $variant = $value;
 
-            return MoisAddress::from($variant);
+            return PafaAddress::from($variant);
         }
 
-        if (self::matches($value, ['dataset' => ['kadaster'], 'country' => ['Netherlands'], 'country_iso' => ['NLD'], 'country_iso_2' => ['NL'], 'language' => ['nl'], 'provincie' => ['Drenthe', 'Flevoland', 'Friesland', 'Gelderland', 'Groningen', 'Limburg', 'Noord-Brabant', 'Noord-Holland', 'Overijssel', 'Utrecht', 'Zeeland', 'Zuid-Holland', '']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'line_1', 'language', 'address', 'identificatie', 'latitude', 'longitude', 'gebruiksdoel', 'oppervlakte', 'status', 'geconstateerd', 'documentdatum', 'documentnummer', 'voorkomenidentificatie', 'begin_geldigheid', 'eind_geldigheid', 'tijdstip_registratie', 'eind_registratie', 'tijdstip_registratie_lv', 'tijdstip_eind_registratie_lv', 'nummeraanduidingen_identificatie', 'nummeraanduidingen_huisnummer', 'nummeraanduidingen_huisnummertoevoeging', 'nummeraanduidingen_huisletter', 'nummeraanduidingen_postcode', 'nummeraanduidingen_type_adresseerbaar_object', 'nummeraanduidingen_status', 'nummeraanduidingen_geconstateerd', 'nummeraanduidingen_documentdatum', 'nummeraanduidingen_documentnummer', 'nummeraanduidingen_voorkomenidentificatie', 'nummeraanduidingen_begin_geldigheid', 'nummeraanduidingen_eind_geldigheid', 'nummeraanduidingen_tijdstip_registratie', 'nummeraanduidingen_eind_registratie', 'nummeraanduidingen_tijdstip_registratie_lv', 'nummeraanduidingen_tijdstip_eind_registratie_lv', 'pand_identificatie', 'pand_oorspronkelijk_bouwjaar', 'pand_status', 'pand_geconstateerd', 'pand_documentdatum', 'pand_documentnummer', 'pand_voorkomenidentificatie', 'pand_begin_geldigheid', 'pand_eind_geldigheid', 'pand_tijdstip_registratie', 'pand_eind_registratie', 'pand_tijdstip_registratie_lv', 'pand_tijdstip_eind_registratie_lv', 'openbare_ruimte_identificatie', 'openbare_ruimte_naam', 'openbare_ruimte_type', 'openbare_ruimte_status', 'openbare_ruimte_geconstateerd', 'openbare_ruimte_documentdatum', 'openbare_ruimte_documentnummer', 'openbare_ruimte_voorkomenidentificatie', 'openbare_ruimte_begin_geldigheid', 'openbare_ruimte_eind_geldigheid', 'openbare_ruimte_tijdstip_registratie', 'openbare_ruimte_eind_registratie', 'openbare_ruimte_tijdstip_registratie_lv', 'openbare_ruimte_tijdstip_eind_registratie_lv', 'openbare_ruimte_verkorte_naam', 'woonplaats_identificatie', 'woonplaats_naam', 'woonplaats_status', 'woonplaats_geconstateerd', 'woonplaats_documentdatum', 'woonplaats_documentnummer', 'woonplaats_voorkomenidentificatie', 'woonplaats_begin_geldigheid', 'woonplaats_eind_geldigheid', 'woonplaats_tijdstip_registratie', 'woonplaats_eind_registratie', 'woonplaats_tijdstip_registratie_lv', 'woonplaats_tijdstip_eind_registratie_lv', 'provincie'])) {
-            /** @var KadasterAddressArray $variant */
+        if (self::matches($value, ['dataset' => ['pafw']], ['dataset', 'postcode', 'post_town', 'dependant_locality', 'double_dependant_locality', 'thoroughfare', 'dependant_thoroughfare', 'building_number', 'building_name', 'sub_building_name', 'department_name', 'organisation_name', 'udprn', 'postcode_type', 'su_organisation_indicator', 'delivery_point_suffix', 'po_box'])) {
+            /** @var PafwAddressArray $variant */
             $variant = $value;
 
-            return KadasterAddress::from($variant);
+            return PafwAddress::from($variant);
         }
 
-        if (self::matches($value, ['dataset' => ['kartverket'], 'country' => ['Norway', 'Svalbard and Jan Mayen'], 'country_iso' => ['NOR', 'SJM'], 'country_iso_2' => ['NO', 'SJ'], 'language' => ['no']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'line_1', 'line_2', 'language', 'address', 'latitude', 'longitude', 'lokal_id', 'kommunenummer', 'kommunenavn', 'adressetype', 'adressetilleggsnavn', 'adressetilleggsnavn_kilde', 'adressekode', 'adressenavn', 'nummer', 'bokstav', 'gardsnummer', 'bruksnummer', 'festenummer', 'seksjonsnummer', 'undernummer', 'adresse_tekst', 'adresse_tekst_uten_adressetilleggsnavn', 'bruksenhet_id', 'bruksenhetsnummer_tekst', 'offisiell_adresse_tekst', 'offisiell_adresse_tekst_uten_adressetilleggsnavn', 'epsg_kode', 'nord', 'oest', 'postnummer', 'poststed', 'grunnkretsnummer', 'grunnkretsnavn', 'soknenummer', 'soknenavn', 'organisasjonsnummer', 'tettstednummer', 'tettstednavn', 'valgkretsnummer', 'valgkretsnavn', 'oppdateringsdato', 'datauttaksdato', 'adresse_id', 'uuid_adresse', 'uuid_bruksenhet', 'atkomst_id', 'uuid_atkomst', 'atkomst_nord', 'atkomst_oest', 'sommeratkomst_id', 'uuid_sommeratkomst', 'sommeratkomst_nord', 'sommeratkomst_oest', 'vinteratkomst_id', 'uuid_vinteratkomst', 'vinteratkomst_nord', 'vinteratkomst_oest', 'fylke', 'landsdel'])) {
-            /** @var KartverketAddressArray $variant */
-            $variant = $value;
-
-            return KartverketAddress::from($variant);
-        }
-
-        if (self::matches($value, ['dataset' => ['bev'], 'country' => ['Austria'], 'country_iso' => ['AUT'], 'country_iso_2' => ['AT'], 'language' => ['de']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'language', 'address', 'line_1', 'line_2', 'latitude', 'longitude', 'adrcd', 'kgnr', 'gkz', 'okz', 'plz', 'skz', 'zaehlsprengel', 'hausnrtext', 'hausnrzahl1', 'hausnrbuchstabe1', 'hausnrverbindung1', 'hausnrzahl2', 'hausnrbuchstabe2', 'hausnrbereich', 'hnr_adr_zusammen', 'gnradresse', 'hofname', 'rw', 'hw', 'epsg', 'quelladresse', 'bestimmungsart', 'subcd', 'objektnummer', 'objfunktkennziffer', 'hauptadresse', 'hausnrverbindung2', 'hausnrzahl3', 'hausnrbuchstabe3', 'hausnrverbindung3', 'hausnrzahl4', 'hausnrbuchstabe4', 'hausnrgebaeudebez', 'hnr_geb_zusammen', 'eigenschaft', 'gemeindename', 'ortsname', 'strassenname', 'strassennamenzusatz', 'szusadrbest', 'zustellort', 'zustellort_id', 'zaehlsprengelname'])) {
-            /** @var BevAddressArray $variant */
-            $variant = $value;
-
-            return BevAddress::from($variant);
-        }
-
-        if (self::matches($value, ['dataset' => ['cannar'], 'country' => ['Canada'], 'country_iso' => ['CAN'], 'country_iso_2' => ['CA'], 'language' => ['en', 'fr']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'language', 'address', 'line_1', 'line_2', 'latitude', 'longitude', 'loc_guid', 'addr_guid', 'apt_no_label', 'civic_no', 'civic_no_suffix', 'official_street_name', 'official_street_type', 'official_street_dir', 'prov_code', 'csd_eng_name', 'csd_fre_name', 'csd_type_eng_code', 'csd_type_fre_code', 'mail_street_name', 'mail_street_type', 'mail_street_dir', 'mail_mun_name', 'mail_prov_abvn', 'mail_postal_code', 'bg_dls_lsd', 'bg_dls_qtr', 'bg_dls_sctn', 'bg_dls_twnshp', 'bg_dls_rng', 'bg_dls_mrd', 'bg_x', 'bg_y', 'bu_n_civic_add', 'bu_use', 'csd_code', 'fed_code', 'fed_eng_name', 'fed_fre_name', 'er_code', 'er_eng_name', 'er_fre_name', 'reppoint_latitude', 'reppoint_longitude'])) {
-            /** @var CannarAddressArray $variant */
-            $variant = $value;
-
-            return CannarAddress::from($variant);
-        }
-
-        if (self::matches($value, ['dataset' => ['swt'], 'country' => ['Switzerland', 'Liechtenstein'], 'country_iso' => ['CHE', 'LIE'], 'country_iso_2' => ['CH', 'LI'], 'language' => ['de', 'fr', 'it', 'rm']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'language', 'canton', 'address', 'line_1', 'line_2', 'latitude', 'longitude', 'adr_egaid', 'str_esid', 'bdg_egid', 'adr_edid', 'stn_label', 'adr_number', 'bdg_category', 'bdg_name', 'zip_label', 'com_fosnr', 'com_name', 'com_canton', 'adr_status', 'adr_official', 'adr_modified', 'adr_easting', 'adr_northing', 'str_type', 'str_status', 'str_official', 'str_modified', 'str_easting', 'str_northing', 'ortschaftsname', 'plz4', 'zusatzziffer', 'zip_id', 'gemeindename', 'bfs_nr', 'kantonskürzel', 'sprache', 'validity'])) {
-            /** @var SwtAddressArray $variant */
-            $variant = $value;
-
-            return SwtAddress::from($variant);
-        }
-
-        if (self::matches($value, ['dataset' => ['ab'], 'change_code' => ['I', 'U', 'D']], ['id', 'country_iso', 'dataset', 'language', 'line_1', 'line_2', 'line_3', 'premise', 'uprn', 'udprn', 'parent_uprn', 'usrn', 'toid', 'classification_code', 'eastings', 'northings', 'latitude', 'longitude', 'single_address_line', 'street_name', 'locality', 'town_name', 'delivery_point_suffix', 'post_town', 'gss_code', 'rpc', 'last_update_date', 'island', 'change_code', 'building_name', 'building_number', 'sub_building', 'postcode', 'po_box', 'organisation', 'country', 'county', 'district', 'ward', 'traditional_county', 'administrative_county', 'postal_county'])) {
+        if (self::matches($value, ['dataset' => ['ab']], ['id', 'country_iso', 'dataset', 'language', 'line_1', 'line_2', 'line_3', 'premise', 'uprn', 'udprn', 'parent_uprn', 'usrn', 'toid', 'classification_code', 'eastings', 'northings', 'latitude', 'longitude', 'single_address_line', 'street_name', 'locality', 'town_name', 'delivery_point_suffix', 'post_town', 'gss_code', 'rpc', 'last_update_date', 'island', 'change_code', 'building_name', 'building_number', 'sub_building', 'postcode', 'po_box', 'organisation', 'country', 'county', 'district', 'ward', 'traditional_county', 'administrative_county', 'postal_county'])) {
             /** @var AbAddressArray $variant */
             $variant = $value;
 
             return AbAddress::from($variant);
         }
 
-        if (self::matches($value, ['dataset' => ['usps'], 'country' => ['American Samoa', 'Federated States of Micronesia', 'Guam', 'Marshall Islands', 'Northern Mariana Islands', 'Palau', 'Puerto Rico', 'United States', 'United States Virgin Islands'], 'country_iso' => ['ASM', 'FSM', 'GUM', 'MHL', 'MNP', 'PLW', 'PRI', 'USA', 'VIR'], 'country_iso_2' => ['AS', 'FM', 'GU', 'MH', 'MP', 'PR', 'PW', 'US', 'VI'], 'language' => ['en'], 'record_type_code' => ['G', 'H', 'F', 'S', 'P', 'R', 'M', ''], 'base_alternate_code' => ['A', 'B', ''], 'lacs_status_indicator' => ['', 'L'], 'government_building_indicator' => ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G'], 'city_state_name_facility_code' => ['B', 'C', 'N', 'P', 'S', 'U', 'Y', ''], 'zip_classification_code' => ['', 'M', 'P', 'U']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'language', 'primary_number', 'secondary_number', 'plus_4_code', 'line_1', 'line_2', 'last_line', 'zip_code', 'zip_plus_4_code', 'update_key_number', 'record_type_code', 'carrier_route_id', 'street_pre_directional_abbreviation', 'street_name', 'street_suffix_abbreviation', 'street_post_directional_abbreviation', 'building_or_firm_name', 'address_secondary_abbreviation', 'base_alternate_code', 'lacs_status_indicator', 'government_building_indicator', 'state_abbreviation', 'state', 'municipality_city_state_key', 'urbanization_city_state_key', 'preferred_last_line_city_state_key', 'county', 'city', 'city_abbreviation', 'preferred_city', 'city_state_name_facility_code', 'zip_classification_code', 'city_state_mailing_name_indicator', 'carrier_route_rate_sortation', 'finance_number', 'congressional_district_number', 'county_number'])) {
+        if (self::matches($value, ['dataset' => ['abp']], ['uprn', 'logical_status', 'country', 'latitude', 'longitude', 'x_coordinate', 'y_coordinate', 'local_custodian_code', 'addressbase_postal', 'postcode_locator', 'multi_occ_count', 'postcode', 'id', 'dataset', 'country_iso', 'suggestion_line'])) {
+            /** @var AbpAddressArray $variant */
+            $variant = $value;
+
+            return AbpAddress::from($variant);
+        }
+
+        if (self::matches($value, ['dataset' => ['usps']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'language', 'primary_number', 'secondary_number', 'plus_4_code', 'line_1', 'line_2', 'last_line', 'zip_code', 'zip_plus_4_code', 'update_key_number', 'record_type_code', 'carrier_route_id', 'street_pre_directional_abbreviation', 'street_name', 'street_suffix_abbreviation', 'street_post_directional_abbreviation', 'building_or_firm_name', 'address_secondary_abbreviation', 'base_alternate_code', 'lacs_status_indicator', 'government_building_indicator', 'state_abbreviation', 'state', 'municipality_city_state_key', 'urbanization_city_state_key', 'preferred_last_line_city_state_key', 'county', 'city', 'city_abbreviation', 'preferred_city', 'city_state_name_facility_code', 'zip_classification_code', 'city_state_mailing_name_indicator', 'carrier_route_rate_sortation', 'finance_number', 'congressional_district_number', 'county_number'])) {
             /** @var UspsAddressArray $variant */
             $variant = $value;
 
             return UspsAddress::from($variant);
         }
 
-        if (self::matches($value, ['dataset' => ['ban'], 'country' => ['France'], 'country_iso' => ['FRA'], 'country_iso_2' => ['FR'], 'language' => ['fr']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'language', 'address', 'line_1', 'line_2', 'latitude', 'longitude', 'id_fantoir', 'numero', 'rep', 'nom_voie', 'code_postal', 'code_insee', 'nom_commune', 'code_insee_ancienne_commune', 'nom_ancienne_commune', 'x', 'y', 'lon', 'lat', 'type_position', 'alias', 'nom_ld', 'libelle_acheminement', 'nom_afnor', 'source_position', 'source_nom_voie', 'certification_commune', 'cad_parcelles'])) {
-            /** @var BanAddressArray $variant */
-            $variant = $value;
-
-            return BanAddress::from($variant);
-        }
-
-        if (self::matches($value, ['dataset' => ['ecad'], 'country_iso' => ['IRL'], 'country_iso_2' => ['IE'], 'country' => ['Ireland'], 'language' => ['en', 'ga']], ['id', 'dataset', 'country_iso', 'country_iso_2', 'country', 'language', 'line_1', 'line_2', 'line_3', 'line_4', 'line_5', 'line_6', 'line_7', 'line_8', 'line_9', 'department', 'organisation', 'sub_building_name', 'building_name', 'building_number', 'building_group', 'primary_thoroughfare', 'secondary_thoroughfare', 'primary_locality', 'secondary_locality', 'tertiary_locality', 'post_county', 'eircode', 'address_reference', 'longitude', 'latitude'])) {
+        if (self::matches($value, ['dataset' => ['ecad']], ['id', 'dataset', 'country_iso', 'country_iso_2', 'country', 'language', 'line_1', 'line_2', 'line_3', 'line_4', 'line_5', 'line_6', 'line_7', 'line_8', 'line_9', 'department', 'organisation', 'sub_building_name', 'building_name', 'building_number', 'building_group', 'primary_thoroughfare', 'secondary_thoroughfare', 'primary_locality', 'secondary_locality', 'tertiary_locality', 'post_county', 'eircode', 'address_reference', 'longitude', 'latitude'])) {
             /** @var EcadAddressArray $variant */
             $variant = $value;
 
             return EcadAddress::from($variant);
         }
 
-        if (self::matches($value, ['dataset' => ['ecaf'], 'country_iso' => ['IRL'], 'country_iso_2' => ['IE'], 'country' => ['Ireland'], 'language' => ['en', 'ga']], ['id', 'dataset', 'country_iso', 'country_iso_2', 'country', 'language', 'line_1', 'line_2', 'line_3', 'line_4', 'line_5', 'line_6', 'line_7', 'line_8', 'line_9', 'department', 'organisation', 'sub_building_name', 'building_name', 'building_number', 'building_group', 'primary_thoroughfare', 'secondary_thoroughfare', 'primary_locality', 'secondary_locality', 'tertiary_locality', 'post_county', 'eircode', 'address_reference', 'longitude', 'latitude'])) {
+        if (self::matches($value, ['dataset' => ['ecaf']], ['id', 'dataset', 'country_iso', 'country_iso_2', 'country', 'language', 'line_1', 'line_2', 'line_3', 'line_4', 'line_5', 'line_6', 'line_7', 'line_8', 'line_9', 'department', 'organisation', 'sub_building_name', 'building_name', 'building_number', 'building_group', 'primary_thoroughfare', 'secondary_thoroughfare', 'primary_locality', 'secondary_locality', 'tertiary_locality', 'post_county', 'eircode', 'address_reference', 'longitude', 'latitude'])) {
             /** @var EcafAddressArray $variant */
             $variant = $value;
 
             return EcafAddress::from($variant);
-        }
-
-        if (self::matches($value, ['dataset' => ['fodbosa'], 'country' => ['Belgium'], 'country_iso' => ['BEL'], 'country_iso_2' => ['BE'], 'language' => ['de', 'fr', 'nl']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'language', 'address', 'line_1', 'latitude', 'longitude', 'epsg_31370_x', 'epsg_31370_y', 'epsg_4326_lat', 'epsg_4326_lon', 'address_id', 'box_number', 'house_number', 'municipality_id', 'municipality_name_de', 'municipality_name_fr', 'municipality_name_nl', 'postcode', 'postname_fr', 'postname_nl', 'street_id', 'streetname_de', 'streetname_fr', 'streetname_nl', 'region_code', 'status'])) {
-            /** @var FodbosaAddressArray $variant */
-            $variant = $value;
-
-            return FodbosaAddress::from($variant);
         }
 
         if (self::matches($value, ['dataset' => ['herewe', 'heret', 'heresa', 'hereo', 'herena', 'heremeas', 'heremea', 'herem', 'herei', 'herehk', 'hereee', 'hereap']], ['id', 'country_iso', 'dataset', 'language', 'line_1', 'line_2', 'line_3', 'line_4', 'line_5', 'address', 'delivery_latitude', 'delivery_longitude', 'building_name', 'latitude', 'longitude', 'street_name', 'postal_code', 'order1_name', 'order2_name', 'order8_name', 'builtup_name', 'poi_name', 'building_unit_name', 'level_name', 'unit_name', 'suppl_address_info', 'building_grp_name'])) {
@@ -182,46 +147,81 @@ final class NativeRecord
             return HereAddress::from($variant);
         }
 
-        if (self::matches($value, ['dataset' => ['paf'], 'postcode_type' => ['S', 'L', '']], ['dataset', 'postcode', 'post_town', 'dependant_locality', 'double_dependant_locality', 'thoroughfare', 'dependant_thoroughfare', 'building_number', 'building_name', 'sub_building_name', 'department_name', 'organisation_name', 'udprn', 'postcode_type', 'su_organisation_indicator', 'delivery_point_suffix', 'po_box'])) {
-            /** @var PafAddressArray $variant */
+        if (self::matches($value, ['dataset' => ['gnaf']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'line_1', 'line_2', 'language', 'address', 'latitude', 'longitude', 'address_detail_pid', 'date_created', 'date_last_modified', 'date_retired', 'building_name', 'lot_number_prefix', 'lot_number', 'lot_number_suffix', 'flat_type_code', 'flat_number_prefix', 'flat_number', 'flat_number_suffix', 'level_type_code', 'level_number_prefix', 'level_number', 'level_number_suffix', 'number_first_prefix', 'number_first', 'number_first_suffix', 'number_last_prefix', 'number_last', 'number_last_suffix', 'street_locality_pid', 'alias_principal', 'postcode', 'private_street', 'legal_parcel_id', 'confidence', 'level_geocoded_code', 'primary_secondary', 'alias_type_code', 'geocode_type_code', 'default_latitude', 'default_longitude', 'address_change_type_code', 'mb_2016_match_code', 'mb_2021_match_code', 'address_type', 'address_site_name', 'geocode_site_name', 'site_geocode_type_code', 'reliability_code', 'site_boundary_extent', 'site_planimetric_accuracy', 'elevation', 'site_longitude', 'site_latitude', 'geocode_type_priority_order', 'site_geocode_priority_order', 'locality_name', 'primary_postcode', 'locality_class_code', 'locality_gnaf_reliability_code', 'locality_alias_name', 'locality_alias_postcode', 'locality_alias_type_code', 'locality_planimetric_accuracy', 'locality_latitude', 'locality_longitude', 'mb_2016_code', 'mb_2021_code', 'ps_join_type_code', 'state_name', 'state_abbreviation', 'street_class_code', 'street_name', 'street_type_code', 'street_suffix_code', 'gnaf_street_confidence', 'street_locality_gnaf_reliability_code', 'street_locality_alias_street_name', 'street_locality_alias_street_type_code', 'street_locality_alias_street_suffix_code', 'street_locality_alias_type_code', 'street_locality_boundary_extent', 'street_locality_planimetric_accuracy', 'street_locality_latitude', 'street_locality_longitude', 'street_type_name', 'street_locality_alias_street_type_name'])) {
+            /** @var GnafAddressArray $variant */
             $variant = $value;
 
-            return PafAddress::from($variant);
+            return GnafAddress::from($variant);
         }
 
-        if (self::matches($value, ['dataset' => ['mr'], 'postcode_type' => ['S', 'L', '']], ['dataset', 'postcode', 'post_town', 'dependant_locality', 'double_dependant_locality', 'thoroughfare', 'dependant_thoroughfare', 'building_number', 'building_name', 'sub_building_name', 'department_name', 'organisation_name', 'udprn', 'postcode_type', 'su_organisation_indicator', 'delivery_point_suffix', 'umprn'])) {
-            /** @var MrAddressArray $variant */
+        if (self::matches($value, ['dataset' => ['kadaster']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'line_1', 'language', 'address', 'identificatie', 'latitude', 'longitude', 'gebruiksdoel', 'oppervlakte', 'status', 'geconstateerd', 'documentdatum', 'documentnummer', 'voorkomenidentificatie', 'begin_geldigheid', 'eind_geldigheid', 'tijdstip_registratie', 'eind_registratie', 'tijdstip_registratie_lv', 'tijdstip_eind_registratie_lv', 'nummeraanduidingen_identificatie', 'nummeraanduidingen_huisnummer', 'nummeraanduidingen_huisnummertoevoeging', 'nummeraanduidingen_huisletter', 'nummeraanduidingen_postcode', 'nummeraanduidingen_type_adresseerbaar_object', 'nummeraanduidingen_status', 'nummeraanduidingen_geconstateerd', 'nummeraanduidingen_documentdatum', 'nummeraanduidingen_documentnummer', 'nummeraanduidingen_voorkomenidentificatie', 'nummeraanduidingen_begin_geldigheid', 'nummeraanduidingen_eind_geldigheid', 'nummeraanduidingen_tijdstip_registratie', 'nummeraanduidingen_eind_registratie', 'nummeraanduidingen_tijdstip_registratie_lv', 'nummeraanduidingen_tijdstip_eind_registratie_lv', 'pand_identificatie', 'pand_oorspronkelijk_bouwjaar', 'pand_status', 'pand_geconstateerd', 'pand_documentdatum', 'pand_documentnummer', 'pand_voorkomenidentificatie', 'pand_begin_geldigheid', 'pand_eind_geldigheid', 'pand_tijdstip_registratie', 'pand_eind_registratie', 'pand_tijdstip_registratie_lv', 'pand_tijdstip_eind_registratie_lv', 'openbare_ruimte_identificatie', 'openbare_ruimte_naam', 'openbare_ruimte_type', 'openbare_ruimte_status', 'openbare_ruimte_geconstateerd', 'openbare_ruimte_documentdatum', 'openbare_ruimte_documentnummer', 'openbare_ruimte_voorkomenidentificatie', 'openbare_ruimte_begin_geldigheid', 'openbare_ruimte_eind_geldigheid', 'openbare_ruimte_tijdstip_registratie', 'openbare_ruimte_eind_registratie', 'openbare_ruimte_tijdstip_registratie_lv', 'openbare_ruimte_tijdstip_eind_registratie_lv', 'openbare_ruimte_verkorte_naam', 'woonplaats_identificatie', 'woonplaats_naam', 'woonplaats_status', 'woonplaats_geconstateerd', 'woonplaats_documentdatum', 'woonplaats_documentnummer', 'woonplaats_voorkomenidentificatie', 'woonplaats_begin_geldigheid', 'woonplaats_eind_geldigheid', 'woonplaats_tijdstip_registratie', 'woonplaats_eind_registratie', 'woonplaats_tijdstip_registratie_lv', 'woonplaats_tijdstip_eind_registratie_lv', 'provincie'])) {
+            /** @var KadasterAddressArray $variant */
             $variant = $value;
 
-            return MrAddress::from($variant);
+            return KadasterAddress::from($variant);
         }
 
-        if (self::matches($value, ['dataset' => ['nyb'], 'postcode_type' => ['S', 'L', '']], ['dataset', 'postcode', 'post_town', 'dependant_locality', 'double_dependant_locality', 'thoroughfare', 'dependant_thoroughfare', 'building_number', 'building_name', 'sub_building_name', 'department_name', 'organisation_name', 'udprn', 'postcode_type', 'su_organisation_indicator', 'delivery_point_suffix', 'po_box'])) {
-            /** @var NybAddressArray $variant */
+        if (self::matches($value, ['dataset' => ['kartverket']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'line_1', 'line_2', 'language', 'address', 'latitude', 'longitude', 'lokal_id', 'kommunenummer', 'kommunenavn', 'adressetype', 'adressetilleggsnavn', 'adressetilleggsnavn_kilde', 'adressekode', 'adressenavn', 'nummer', 'bokstav', 'gardsnummer', 'bruksnummer', 'festenummer', 'seksjonsnummer', 'undernummer', 'adresse_tekst', 'adresse_tekst_uten_adressetilleggsnavn', 'bruksenhet_id', 'bruksenhetsnummer_tekst', 'offisiell_adresse_tekst', 'offisiell_adresse_tekst_uten_adressetilleggsnavn', 'epsg_kode', 'nord', 'oest', 'postnummer', 'poststed', 'grunnkretsnummer', 'grunnkretsnavn', 'soknenummer', 'soknenavn', 'organisasjonsnummer', 'tettstednummer', 'tettstednavn', 'valgkretsnummer', 'valgkretsnavn', 'oppdateringsdato', 'datauttaksdato', 'adresse_id', 'uuid_adresse', 'uuid_bruksenhet', 'atkomst_id', 'uuid_atkomst', 'atkomst_nord', 'atkomst_oest', 'sommeratkomst_id', 'uuid_sommeratkomst', 'sommeratkomst_nord', 'sommeratkomst_oest', 'vinteratkomst_id', 'uuid_vinteratkomst', 'vinteratkomst_nord', 'vinteratkomst_oest', 'fylke', 'landsdel'])) {
+            /** @var KartverketAddressArray $variant */
             $variant = $value;
 
-            return NybAddress::from($variant);
+            return KartverketAddress::from($variant);
         }
 
-        if (self::matches($value, ['dataset' => ['pafa'], 'postcode_type' => ['S', 'L', '']], ['dataset', 'postcode', 'post_town', 'dependant_locality', 'double_dependant_locality', 'thoroughfare', 'dependant_thoroughfare', 'building_number', 'building_name', 'sub_building_name', 'department_name', 'organisation_name', 'udprn', 'postcode_type', 'su_organisation_indicator', 'delivery_point_suffix', 'po_box'])) {
-            /** @var PafaAddressArray $variant */
+        if (self::matches($value, ['dataset' => ['sdfi']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'address', 'line_1', 'line_2', 'language', 'latitude', 'longitude', 'adresse_id', 'kvhx', 'kvh', 'adgangsadresse', 'status', 'darstatus', 'oprettet', 'ændret', 'ikrafttrædelse', 'nedlagt', 'vejkode', 'vejnavn', 'adresseringsvejnavn', 'husnr', 'etage', 'dør', 'supplerendebynavn_dagi_id', 'supplerendebynavn', 'postnr', 'postnrnavn', 'stormodtagerpostnr', 'stormodtagerpostnrnavn', 'betegnelse', 'adressepunktændringsdato', 'etrs89koordinat_øst', 'etrs89koordinat_nord', 'wgs84koordinat_bredde', 'wgs84koordinat_længde', 'højde', 'nøjagtighed', 'kilde', 'tekniskstandard', 'tekstretning', 'ddkn_m100', 'ddkn_km1', 'ddkn_km10', 'kommunekode', 'kommunenavn', 'landsdelsnuts3', 'landsdelsnavn', 'regionskode', 'regionsnavn', 'afstemningsområdenummer', 'afstemningsområdenavn', 'menighedsrådsafstemningsområdenummer', 'menighedsrådsafstemningsområdenavn', 'opstillingskredskode', 'opstillingskredsnavn', 'storkredsnummer', 'storkredsnavn', 'valglandsdelsbogstav', 'valglandsdelsnavn', 'sognekode', 'sognenavn', 'politikredskode', 'politikredsnavn', 'retskredskode', 'retskredsnavn', 'jordstykke_ejerlavkode', 'jordstykke_ejerlavnavn', 'jordstykke_matrikelnr', 'jordstykke_esrejendomsnr', 'ejerlavkode', 'ejerlavnavn', 'matrikelnr', 'esrejendomsnr', 'zone', 'brofast', 'adgangsadresseid', 'adgangspunktid', 'navngivenvej_id', 'adgangsadresse_status', 'adgangsadresse_darstatus', 'adgangsadresse_oprettet', 'adgangsadresse_ændret', 'adgangsadresse_ikrafttrædelse', 'adgangsadresse_nedlagt', 'vejpunkt_id', 'vejpunkt_ændret', 'vejpunkt_kilde', 'vejpunkt_nøjagtighed', 'vejpunkt_tekniskstandard', 'vejpunkt_x', 'vejpunkt_y'])) {
+            /** @var SdfiAddressArray $variant */
             $variant = $value;
 
-            return PafaAddress::from($variant);
+            return SdfiAddress::from($variant);
         }
 
-        if (self::matches($value, ['dataset' => ['pafw'], 'postcode_type' => ['S', 'L', '']], ['dataset', 'postcode', 'post_town', 'dependant_locality', 'double_dependant_locality', 'thoroughfare', 'dependant_thoroughfare', 'building_number', 'building_name', 'sub_building_name', 'department_name', 'organisation_name', 'udprn', 'postcode_type', 'su_organisation_indicator', 'delivery_point_suffix', 'po_box'])) {
-            /** @var PafwAddressArray $variant */
+        if (self::matches($value, ['dataset' => ['cannar']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'language', 'address', 'line_1', 'line_2', 'latitude', 'longitude', 'loc_guid', 'addr_guid', 'apt_no_label', 'civic_no', 'civic_no_suffix', 'official_street_name', 'official_street_type', 'official_street_dir', 'prov_code', 'csd_eng_name', 'csd_fre_name', 'csd_type_eng_code', 'csd_type_fre_code', 'mail_street_name', 'mail_street_type', 'mail_street_dir', 'mail_mun_name', 'mail_prov_abvn', 'mail_postal_code', 'bg_dls_lsd', 'bg_dls_qtr', 'bg_dls_sctn', 'bg_dls_twnshp', 'bg_dls_rng', 'bg_dls_mrd', 'bg_x', 'bg_y', 'bu_n_civic_add', 'bu_use', 'csd_code', 'fed_code', 'fed_eng_name', 'fed_fre_name', 'er_code', 'er_eng_name', 'er_fre_name', 'reppoint_latitude', 'reppoint_longitude'])) {
+            /** @var CannarAddressArray $variant */
             $variant = $value;
 
-            return PafwAddress::from($variant);
+            return CannarAddress::from($variant);
         }
 
-        if (self::matches($value, ['dataset' => ['abp'], 'country_iso' => ['GBR']], ['uprn', 'logical_status', 'country', 'latitude', 'longitude', 'x_coordinate', 'y_coordinate', 'local_custodian_code', 'addressbase_postal', 'postcode_locator', 'multi_occ_count', 'postcode', 'id', 'dataset', 'country_iso', 'suggestion_line'])) {
-            /** @var AbpAddressArray $variant */
+        if (self::matches($value, ['dataset' => ['fodbosa']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'language', 'address', 'line_1', 'latitude', 'longitude', 'epsg_31370_x', 'epsg_31370_y', 'epsg_4326_lat', 'epsg_4326_lon', 'address_id', 'box_number', 'house_number', 'municipality_id', 'municipality_name_de', 'municipality_name_fr', 'municipality_name_nl', 'postcode', 'postname_fr', 'postname_nl', 'street_id', 'streetname_de', 'streetname_fr', 'streetname_nl', 'region_code', 'status'])) {
+            /** @var FodbosaAddressArray $variant */
             $variant = $value;
 
-            return AbpAddress::from($variant);
+            return FodbosaAddress::from($variant);
+        }
+
+        if (self::matches($value, ['dataset' => ['mois']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'language', 'address', 'line_1', 'line_2', 'city', 'province', '법정읍면동명', '법정동코드', '법정리명', '비고1', '비고2', '변동전도로명주소', '변경이력정보', '변경이력사유', '변경전_도로명주소', '변경사유', '변경사유코드', '층일련번호', '층명칭', '대표지번여부', '대표여부', '다량배달처명', '동일련번호', '동명칭', '도로명', '도로명_로마자', '도로명번호', '도로명코드', '도로명코드_고시일자', '도로명코드_말소일자', '읍면동구분', '읍면동일련번호', '읍면동코드', '읍면동명', '읍면동명_로마자', '건축물대장_건물명', '건물본번', '건물부번', '건물관리번호', '기초구역번호', '공동주택여부', '고시일자', '관리번호', '행정동코드', '행정동명', '호일련번호', '호명칭', '호접미사일련번호', '호접미사명칭', '이동사유코드', '일련번호', '지번일련번호', '지번본번_번지', '지번부번_호', '지하구분', '지하여부', '산여부', '상위도로명', '상위도로명번호', '상세건물명', '상세주소_부여여부', '상세주소여부', '사용여부', '시도명', '시도명_로마자', '시군구_건물명', '시군구코드', '시군구명', '시군구명_로마자', '시군구용_건물명', '우편일련번호', '우편번호', '우편번호_일련번호', '영문_법정리명', '영문읍면동명', '영문_법정읍면동명', '영문도로명', '영문시도명', '영문시군구명'])) {
+            /** @var MoisAddressArray $variant */
+            $variant = $value;
+
+            return MoisAddress::from($variant);
+        }
+
+        if (self::matches($value, ['dataset' => ['upujp']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'language', 'script', 'address', 'line_1', 'building_name', 'neighbourhood', 'district', 'city', 'prefecture', 'postcode', 'latitude', 'longitude', 'org_id', 'org_type_ind', 'org_sub_type_ind', 'org_loc_id', 'org_dis_id', 'org_nei_id', 'org_org_id', 'org_name', 'org_name_trans', 'org_loc_sfx', 'org_loc_sfx_trans', 'org_adr', 'org_adr_trans', 'org_po_ind', 'org_po_start', 'org_po_end', 'org_dsc', 'org_dsc_trans', 'org_pcode', 'org_pcode_fin', 'org_script', 'org_language', 'str_id', 'str_key', 'str_loc_id', 'str_dis_id', 'str_nei_id', 'str_org_id', 'str_pfx', 'str_pfx_trans', 'str_qlf_pre', 'str_qlf_pre_trans', 'str_qlf_suc', 'str_qlf_suc_trans', 'str_name', 'str_name_trans', 'str_loc_sfx', 'str_loc_sfx_trans', 'str_type', 'str_type_trans', 'str_type_abv', 'str_type_abv_trans', 'str_adr_num_key', 'str_from_num', 'str_from_unit', 'str_from_alph', 'str_to_num', 'str_to_unit', 'str_to_alph', 'str_evenodd', 'str_dsc', 'str_dsc_trans', 'str_blg_id', 'str_blg_name', 'str_blg_name_trans', 'str_blg_type', 'str_blg_type_trans', 'str_blg_dsc', 'str_blg_dsc_trans', 'str_ref_str_id', 'str_pcode', 'str_script', 'str_language', 'sub_dis_id', 'sub_dis_key', 'sub_loc_id', 'sub_loc_sfx', 'sub_loc_sfx_trans', 'sub_dis_name', 'sub_dis_name_trans', 'sub_dis_sfx', 'sub_dis_sfx_trans', 'sub_dis_dsc', 'sub_dis_dsc_trans', 'sub_dis_pcode', 'sub_dis_pcode_fin', 'sub_nei_id', 'sub_nei_key', 'sub_nei_name', 'sub_nei_name_trans', 'sub_nei_sfx', 'sub_nei_sfx_trans', 'sub_nei_zone_from', 'sub_nei_zone_to', 'sub_nei_dsc', 'sub_nei_dsc_trans', 'sub_nei_pcode', 'sub_script', 'sub_language', 'loc_id', 'loc_key', 'loc_adm1_id', 'loc_adm1_key', 'loc_adm1_name', 'loc_adm1_name_trans', 'loc_adm1_sfx', 'loc_adm1_sfx_trans', 'loc_adm1_abv', 'loc_adm1_abv_trans', 'loc_adm2_id', 'loc_adm2_key', 'loc_adm2_name', 'loc_adm2_name_trans', 'loc_adm2_sfx', 'loc_adm2_sfx_trans', 'loc_adm2_abv', 'loc_adm2_abv_trans', 'loc_adm3_id', 'loc_adm3_key', 'loc_adm3_name', 'loc_adm3_name_trans', 'loc_adm3_sfx', 'loc_adm3_sfx_trans', 'loc_adm3_abv', 'loc_adm3_abv_trans', 'loc_name', 'loc_name_trans', 'loc_sfx', 'loc_sfx_trans', 'loc_pcode', 'loc_pcode_fin', 'loc_dsc', 'loc_dsc_trans', 'loc_script', 'loc_language'])) {
+            /** @var UpujpAddressArray $variant */
+            $variant = $value;
+
+            return UpujpAddress::from($variant);
+        }
+
+        if (self::matches($value, ['dataset' => ['bev']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'language', 'address', 'line_1', 'line_2', 'latitude', 'longitude', 'adrcd', 'kgnr', 'gkz', 'okz', 'plz', 'skz', 'zaehlsprengel', 'hausnrtext', 'hausnrzahl1', 'hausnrbuchstabe1', 'hausnrverbindung1', 'hausnrzahl2', 'hausnrbuchstabe2', 'hausnrbereich', 'hnr_adr_zusammen', 'gnradresse', 'hofname', 'rw', 'hw', 'epsg', 'quelladresse', 'bestimmungsart', 'subcd', 'objektnummer', 'objfunktkennziffer', 'hauptadresse', 'hausnrverbindung2', 'hausnrzahl3', 'hausnrbuchstabe3', 'hausnrverbindung3', 'hausnrzahl4', 'hausnrbuchstabe4', 'hausnrgebaeudebez', 'hnr_geb_zusammen', 'eigenschaft', 'gemeindename', 'ortsname', 'strassenname', 'strassennamenzusatz', 'szusadrbest', 'zustellort', 'zustellort_id', 'zaehlsprengelname'])) {
+            /** @var BevAddressArray $variant */
+            $variant = $value;
+
+            return BevAddress::from($variant);
+        }
+
+        if (self::matches($value, ['dataset' => ['ban']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'language', 'address', 'line_1', 'line_2', 'latitude', 'longitude', 'id_fantoir', 'numero', 'rep', 'nom_voie', 'code_postal', 'code_insee', 'nom_commune', 'code_insee_ancienne_commune', 'nom_ancienne_commune', 'x', 'y', 'lon', 'lat', 'type_position', 'alias', 'nom_ld', 'libelle_acheminement', 'nom_afnor', 'source_position', 'source_nom_voie', 'certification_commune', 'cad_parcelles'])) {
+            /** @var BanAddressArray $variant */
+            $variant = $value;
+
+            return BanAddress::from($variant);
+        }
+
+        if (self::matches($value, ['dataset' => ['swt']], ['id', 'dataset', 'country', 'country_iso', 'country_iso_2', 'language', 'canton', 'address', 'line_1', 'line_2', 'latitude', 'longitude', 'adr_egaid', 'str_esid', 'bdg_egid', 'adr_edid', 'stn_label', 'adr_number', 'bdg_category', 'bdg_name', 'zip_label', 'com_fosnr', 'com_name', 'com_canton', 'adr_status', 'adr_official', 'adr_modified', 'adr_easting', 'adr_northing', 'str_type', 'str_status', 'str_official', 'str_modified', 'str_easting', 'str_northing', 'ortschaftsname', 'plz4', 'zusatzziffer', 'zip_id', 'gemeindename', 'bfs_nr', 'kantonskürzel', 'sprache', 'validity'])) {
+            /** @var SwtAddressArray $variant */
+            $variant = $value;
+
+            return SwtAddress::from($variant);
         }
 
         return $value;

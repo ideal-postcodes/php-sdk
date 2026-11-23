@@ -9,9 +9,9 @@ require __DIR__.'/../vendor/autoload.php';
 
 $client = IdealPostcodes::client('ak_test');
 
-$response = $client->addresses()->cleanse([
-    'query' => '10 Downing St, London, SW1A',
-    'postcode' => 'SW1A 2AA',
+$response = $client->addressCleanse([
+    'query' => '9 Malyons Rd, Swanley, BR8',
+    'postcode' => 'BR8 7RE',
 ]);
 
 $result = $response->result;

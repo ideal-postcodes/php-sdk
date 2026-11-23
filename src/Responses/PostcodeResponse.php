@@ -51,12 +51,12 @@ final class PostcodeResponse implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            result: array_map(static fn ($item) => AddressListItem::from($item), $attributes['result']),
-            code: $attributes['code'],
-            message: $attributes['message'],
-            page: $attributes['page'],
-            limit: $attributes['limit'],
-            total: $attributes['total'],
+            result: array_map(static fn ($item) => AddressListItem::from($item), ($attributes['result'] ?? throw self::missing('result'))),
+            code: $attributes['code'] ?? throw self::missing('code'),
+            message: $attributes['message'] ?? throw self::missing('message'),
+            page: $attributes['page'] ?? throw self::missing('page'),
+            limit: $attributes['limit'] ?? throw self::missing('limit'),
+            total: $attributes['total'] ?? throw self::missing('total'),
         );
     }
 

@@ -96,10 +96,18 @@ final class Factory
     }
 
     /**
-     * A header sent with every request, such as a `User-Agent` naming your application.
+     * A header sent with every request. Header names are case-insensitive, so
+     * setting one again replaces it. A `User-Agent` naming your application is
+     * sent ahead of the SDK's own identifier, never in place of it.
      */
     public function withHttpHeader(string $name, string $value): self
     {
+        foreach (array_keys($this->headers) as $existing) {
+            if (strcasecmp($existing, $name) === 0) {
+                unset($this->headers[$existing]);
+            }
+        }
+
         $this->headers[$name] = $value;
 
         return $this;
@@ -119,9 +127,37 @@ final class Factory
             streamFactory: $this->streamFactory ?? Psr17FactoryDiscovery::findStreamFactory(),
             baseUri: BaseUri::from($this->baseUri ?? self::DEFAULT_BASE_URI),
             credentials: new Credentials($apiKey, $this->managementKey),
-            headers: $this->headers + ['User-Agent' => 'ideal-postcodes-php-sdk/'.IdealPostcodes::VERSION],
+            headers: $this->headersWithUserAgent(),
         );
 
         return new Client($transporter);
+    }
+
+    /**
+     * The configured headers with the SDK identifier appended to any
+     * `User-Agent` the caller set, so the API can always tell which SDK
+     * version and PHP version sent a request.
+     *
+     * @return array<string, string>
+     */
+    private function headersWithUserAgent(): array
+    {
+        $headers = [];
+        $userAgent = '';
+
+        foreach ($this->headers as $name => $value) {
+            if (strcasecmp($name, 'User-Agent') === 0) {
+                $userAgent = trim($value);
+
+                continue;
+            }
+
+            $headers[$name] = $value;
+        }
+
+        $identifier = IdealPostcodes::userAgent();
+        $headers['User-Agent'] = $userAgent === '' ? $identifier : $userAgent.' '.$identifier;
+
+        return $headers;
     }
 }

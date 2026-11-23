@@ -36,7 +36,7 @@ final class FodbosaAddress implements ResponseContract
 
     private function __construct(
         /**
-         * Global unique internally generated identifier for an address
+         * Globally unique internally generated identifier for an address
          */
         public readonly string $id,
         /**
@@ -173,36 +173,36 @@ final class FodbosaAddress implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            id: $attributes['id'],
-            dataset: $attributes['dataset'],
-            country: $attributes['country'],
-            countryIso: $attributes['country_iso'],
-            countryIso2: $attributes['country_iso_2'],
-            language: $attributes['language'],
-            address: $attributes['address'],
-            line1: $attributes['line_1'],
-            latitude: $attributes['latitude'],
-            longitude: $attributes['longitude'],
-            epsg31370X: $attributes['epsg_31370_x'],
-            epsg31370Y: $attributes['epsg_31370_y'],
-            epsg4326Lat: $attributes['epsg_4326_lat'],
-            epsg4326Lon: $attributes['epsg_4326_lon'],
-            addressId: $attributes['address_id'],
-            boxNumber: $attributes['box_number'],
-            houseNumber: $attributes['house_number'],
-            municipalityId: $attributes['municipality_id'],
-            municipalityNameDe: $attributes['municipality_name_de'],
-            municipalityNameFr: $attributes['municipality_name_fr'],
-            municipalityNameNl: $attributes['municipality_name_nl'],
-            postcode: $attributes['postcode'],
-            postnameFr: $attributes['postname_fr'],
-            postnameNl: $attributes['postname_nl'],
-            streetId: $attributes['street_id'],
-            streetnameDe: $attributes['streetname_de'],
-            streetnameFr: $attributes['streetname_fr'],
-            streetnameNl: $attributes['streetname_nl'],
-            regionCode: $attributes['region_code'],
-            status: $attributes['status'],
+            id: $attributes['id'] ?? throw self::missing('id'),
+            dataset: $attributes['dataset'] ?? throw self::missing('dataset'),
+            country: $attributes['country'] ?? throw self::missing('country'),
+            countryIso: $attributes['country_iso'] ?? throw self::missing('country_iso'),
+            countryIso2: $attributes['country_iso_2'] ?? throw self::missing('country_iso_2'),
+            language: $attributes['language'] ?? throw self::missing('language'),
+            address: $attributes['address'] ?? throw self::missing('address'),
+            line1: $attributes['line_1'] ?? throw self::missing('line_1'),
+            latitude: $attributes['latitude'] ?? throw self::missing('latitude'),
+            longitude: $attributes['longitude'] ?? throw self::missing('longitude'),
+            epsg31370X: $attributes['epsg_31370_x'] ?? throw self::missing('epsg_31370_x'),
+            epsg31370Y: $attributes['epsg_31370_y'] ?? throw self::missing('epsg_31370_y'),
+            epsg4326Lat: $attributes['epsg_4326_lat'] ?? throw self::missing('epsg_4326_lat'),
+            epsg4326Lon: $attributes['epsg_4326_lon'] ?? throw self::missing('epsg_4326_lon'),
+            addressId: $attributes['address_id'] ?? throw self::missing('address_id'),
+            boxNumber: $attributes['box_number'] ?? throw self::missing('box_number'),
+            houseNumber: $attributes['house_number'] ?? throw self::missing('house_number'),
+            municipalityId: $attributes['municipality_id'] ?? throw self::missing('municipality_id'),
+            municipalityNameDe: $attributes['municipality_name_de'] ?? throw self::missing('municipality_name_de'),
+            municipalityNameFr: $attributes['municipality_name_fr'] ?? throw self::missing('municipality_name_fr'),
+            municipalityNameNl: $attributes['municipality_name_nl'] ?? throw self::missing('municipality_name_nl'),
+            postcode: $attributes['postcode'] ?? throw self::missing('postcode'),
+            postnameFr: $attributes['postname_fr'] ?? throw self::missing('postname_fr'),
+            postnameNl: $attributes['postname_nl'] ?? throw self::missing('postname_nl'),
+            streetId: $attributes['street_id'] ?? throw self::missing('street_id'),
+            streetnameDe: $attributes['streetname_de'] ?? throw self::missing('streetname_de'),
+            streetnameFr: $attributes['streetname_fr'] ?? throw self::missing('streetname_fr'),
+            streetnameNl: $attributes['streetname_nl'] ?? throw self::missing('streetname_nl'),
+            regionCode: $attributes['region_code'] ?? throw self::missing('region_code'),
+            status: $attributes['status'] ?? throw self::missing('status'),
         );
     }
 

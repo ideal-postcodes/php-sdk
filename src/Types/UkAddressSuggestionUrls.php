@@ -40,7 +40,7 @@ final class UkAddressSuggestionUrls implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            udprn: $attributes['udprn'],
+            udprn: $attributes['udprn'] ?? throw self::missing('udprn'),
             umprn: $attributes['umprn'] ?? null,
         );
     }

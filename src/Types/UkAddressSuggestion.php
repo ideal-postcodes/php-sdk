@@ -32,7 +32,7 @@ final class UkAddressSuggestion implements ResponseContract
 
     private function __construct(
         /**
-         * Global unique internally generated identifier for an address
+         * Globally unique internally generated identifier for an address
          */
         public readonly string $id,
         /**
@@ -59,11 +59,11 @@ final class UkAddressSuggestion implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            id: $attributes['id'],
-            suggestion: $attributes['suggestion'],
-            udprn: $attributes['udprn'],
+            id: $attributes['id'] ?? throw self::missing('id'),
+            suggestion: $attributes['suggestion'] ?? throw self::missing('suggestion'),
+            udprn: $attributes['udprn'] ?? throw self::missing('udprn'),
             umprn: $attributes['umprn'] ?? null,
-            urls: UkAddressSuggestionUrls::from($attributes['urls']),
+            urls: UkAddressSuggestionUrls::from(($attributes['urls'] ?? throw self::missing('urls'))),
         );
     }
 

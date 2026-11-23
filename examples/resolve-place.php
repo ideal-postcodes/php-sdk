@@ -8,7 +8,7 @@ require __DIR__.'/../vendor/autoload.php';
 
 $client = IdealPostcodes::client('ak_test');
 
-$response = $client->places()->resolve('geonames_7296662');
+$response = $client->resolvePlace('geonames_7296662');
 
 $place = $response->result;
 

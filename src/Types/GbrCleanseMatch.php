@@ -15,7 +15,7 @@ use IdealPostcodes\Contracts\ResponseContract;
  * Address Match
  *
  * @phpstan-import-type AddressArray from Address
- * @phpstan-type GbrCleanseMatchArray array{query: string, match: AddressArray, count: float|int, fit: float|int, confidence: float|int, organisation_match: 'FULL'|'PARTIAL'|'INCORRECT'|'MISSING'|'NA', premise_match: 'FULL'|'PARTIAL'|'INCORRECT'|'MISSING'|'NA', postcode_match: 'FULL'|'PARTIAL'|'INCORRECT'|'MISSING'|'NA', thoroughfare_match: 'FULL'|'PARTIAL'|'INCORRECT'|'MISSING'|'NA', locality_match: 'FULL'|'PARTIAL'|'INCORRECT'|'MISSING'|'NA', post_town_match: 'FULL'|'PARTIAL'|'INCORRECT'|'MISSING'|'NA'}
+ * @phpstan-type GbrCleanseMatchArray array{query: string, match: AddressArray, count: int, fit: float|int, confidence: float|int, organisation_match: 'FULL'|'PARTIAL'|'INCORRECT'|'MISSING'|'NA', premise_match: 'FULL'|'PARTIAL'|'INCORRECT'|'MISSING'|'NA', postcode_match: 'FULL'|'PARTIAL'|'INCORRECT'|'MISSING'|'NA', thoroughfare_match: 'FULL'|'PARTIAL'|'INCORRECT'|'MISSING'|'NA', locality_match: 'FULL'|'PARTIAL'|'INCORRECT'|'MISSING'|'NA', post_town_match: 'FULL'|'PARTIAL'|'INCORRECT'|'MISSING'|'NA'}
  *
  * @implements ResponseContract<GbrCleanseMatchArray>
  */
@@ -36,13 +36,13 @@ final class GbrCleanseMatch implements ResponseContract
         /**
          * The number of addresses we matched to the input. We return the closest match by default.
          */
-        public readonly float $count,
+        public readonly int $count,
         /**
-         * A score represented as number between 1 and 0. Fit compares the address elements present in your query against the matching address elements. It does not incorporate elements you have not presented in the score. A partial address (e.g. 12 Pye Green Road) will have a fit of 1 even though it is missing post town and postcode. Its confidence score will be less than 1 however because it is missing some crucial elements.
+         * A score represented as a number between 1 and 0. Fit compares the address elements present in your query against the matching address elements. It does not incorporate elements you have not presented in the score. A partial address (e.g. 12 Pye Green Road) will have a fit of 1 even though it is missing post town and postcode. Its confidence score will be less than 1 however because it is missing some crucial elements.
          */
         public readonly float $fit,
         /**
-         * A confidence score represented as number between 1 and 0. 1 indicates a full match. 0 indicates no complete matching elements.
+         * A confidence score represented as a number between 1 and 0. 1 indicates a full match. 0 indicates no complete matching elements.
          */
         public readonly float $confidence,
         /**
@@ -89,17 +89,17 @@ final class GbrCleanseMatch implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            query: $attributes['query'],
-            match: Address::from($attributes['match']),
-            count: $attributes['count'],
-            fit: $attributes['fit'],
-            confidence: $attributes['confidence'],
-            organisationMatch: $attributes['organisation_match'],
-            premiseMatch: $attributes['premise_match'],
-            postcodeMatch: $attributes['postcode_match'],
-            thoroughfareMatch: $attributes['thoroughfare_match'],
-            localityMatch: $attributes['locality_match'],
-            postTownMatch: $attributes['post_town_match'],
+            query: $attributes['query'] ?? throw self::missing('query'),
+            match: Address::from(($attributes['match'] ?? throw self::missing('match'))),
+            count: $attributes['count'] ?? throw self::missing('count'),
+            fit: $attributes['fit'] ?? throw self::missing('fit'),
+            confidence: $attributes['confidence'] ?? throw self::missing('confidence'),
+            organisationMatch: $attributes['organisation_match'] ?? throw self::missing('organisation_match'),
+            premiseMatch: $attributes['premise_match'] ?? throw self::missing('premise_match'),
+            postcodeMatch: $attributes['postcode_match'] ?? throw self::missing('postcode_match'),
+            thoroughfareMatch: $attributes['thoroughfare_match'] ?? throw self::missing('thoroughfare_match'),
+            localityMatch: $attributes['locality_match'] ?? throw self::missing('locality_match'),
+            postTownMatch: $attributes['post_town_match'] ?? throw self::missing('post_town_match'),
         );
     }
 

@@ -65,14 +65,14 @@ final class PhoneNumber implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            valid: $attributes['valid'],
-            nationalFormat: $attributes['national_format'],
-            internationalFormat: $attributes['international_format'],
-            isoCountry: $attributes['iso_country'],
-            isoCountry2: $attributes['iso_country_2'],
-            country: $attributes['country'],
-            currentCarrier: $attributes['current_carrier'] === null ? null : Carrier::from($attributes['current_carrier']),
-            originalCarrier: $attributes['original_carrier'] === null ? null : Carrier::from($attributes['original_carrier']),
+            valid: $attributes['valid'] ?? throw self::missing('valid'),
+            nationalFormat: $attributes['national_format'] ?? throw self::missing('national_format'),
+            internationalFormat: $attributes['international_format'] ?? throw self::missing('international_format'),
+            isoCountry: $attributes['iso_country'] ?? throw self::missing('iso_country'),
+            isoCountry2: $attributes['iso_country_2'] ?? throw self::missing('iso_country_2'),
+            country: $attributes['country'] ?? throw self::missing('country'),
+            currentCarrier: ($attributes['current_carrier'] ?? null) === null ? null : Carrier::from($attributes['current_carrier']),
+            originalCarrier: ($attributes['original_carrier'] ?? null) === null ? null : Carrier::from($attributes['original_carrier']),
         );
     }
 

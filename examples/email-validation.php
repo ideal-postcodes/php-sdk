@@ -9,7 +9,7 @@ require __DIR__.'/../vendor/autoload.php';
 
 $client = IdealPostcodes::client('ak_test');
 
-$response = $client->emails()->validate('support@ideal-postcodes.co.uk');
+$response = $client->emailValidation(['query' => 'support@ideal-postcodes.co.uk']);
 
 $result = $response->result;
 

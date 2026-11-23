@@ -40,8 +40,8 @@ final class ApiKeyDailyLimit implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            limit: $attributes['limit'],
-            consumed: $attributes['consumed'],
+            limit: $attributes['limit'] ?? null,
+            consumed: $attributes['consumed'] ?? throw self::missing('consumed'),
         );
     }
 

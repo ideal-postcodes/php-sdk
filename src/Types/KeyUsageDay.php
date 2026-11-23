@@ -34,8 +34,8 @@ final class KeyUsageDay implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            date: $attributes['date'],
-            count: $attributes['count'],
+            date: $attributes['date'] ?? throw self::missing('date'),
+            count: $attributes['count'] ?? throw self::missing('count'),
         );
     }
 

@@ -62,13 +62,13 @@ final class UnknownEmail implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            result: $attributes['result'],
-            deliverable: $attributes['deliverable'],
-            disposable: $attributes['disposable'],
-            free: $attributes['free'],
-            role: $attributes['role'],
-            catchall: $attributes['catchall'],
-            suggestions: $attributes['suggestions'],
+            result: $attributes['result'] ?? throw self::missing('result'),
+            deliverable: $attributes['deliverable'] ?? null,
+            disposable: $attributes['disposable'] ?? null,
+            free: $attributes['free'] ?? null,
+            role: $attributes['role'] ?? null,
+            catchall: $attributes['catchall'] ?? null,
+            suggestions: $attributes['suggestions'] ?? throw self::missing('suggestions'),
         );
     }
 

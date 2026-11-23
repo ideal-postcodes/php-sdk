@@ -46,9 +46,9 @@ final class LicenseesResponse implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            result: LicenseesResult::from($attributes['result']),
-            message: $attributes['message'],
-            code: $attributes['code'],
+            result: LicenseesResult::from(($attributes['result'] ?? throw self::missing('result'))),
+            message: $attributes['message'] ?? throw self::missing('message'),
+            code: $attributes['code'] ?? throw self::missing('code'),
         );
     }
 

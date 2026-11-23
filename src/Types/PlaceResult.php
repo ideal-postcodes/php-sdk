@@ -39,7 +39,7 @@ final class PlaceResult implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            hits: array_map(static fn ($item) => self::hydrateHit($item), $attributes['hits']),
+            hits: array_map(static fn ($item) => self::hydrateHit($item), ($attributes['hits'] ?? throw self::missing('hits'))),
         );
     }
 
@@ -55,13 +55,9 @@ final class PlaceResult implements ResponseContract
      */
     private static function hydrateHit(array $value): PlaceSuggestion
     {
-        if (self::matches($value, [], ['id', 'name', 'descriptive_name', 'country_iso'])) {
-            /** @var PlaceSuggestionArray $variant */
-            $variant = $value;
+        /** @var PlaceSuggestionArray $variant */
+        $variant = $value;
 
-            return PlaceSuggestion::from($variant);
-        }
-
-        throw new \UnexpectedValueException('The response matches no known variant of PlaceSuggestion.');
+        return PlaceSuggestion::from($variant);
     }
 }

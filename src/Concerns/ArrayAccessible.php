@@ -6,6 +6,7 @@ namespace IdealPostcodes\Concerns;
 
 use BadMethodCallException;
 use IdealPostcodes\Contracts\ResponseContract;
+use IdealPostcodes\Exceptions\MissingResponseField;
 
 /**
  * Read-only array access and JSON serialisation over `toArray()`.
@@ -44,10 +45,15 @@ trait ArrayAccessible
         return $this->toArray();
     }
 
+    private static function missing(string $field): MissingResponseField
+    {
+        return new MissingResponseField(self::class, $field);
+    }
+
     /**
-     * Whether a decoded object looks like one `oneOf` variant: every
-     * enum-constrained field holds an allowed value and every required key
-     * is present.
+     * Whether a decoded object looks like one `oneOf` variant: each
+     * discriminating field holds one of its values and every listed key is
+     * present.
      *
      * @param  array<string, mixed>  $value
      * @param  array<string, list<scalar|null>>  $enums

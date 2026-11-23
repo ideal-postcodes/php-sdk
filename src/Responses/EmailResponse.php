@@ -45,9 +45,9 @@ final class EmailResponse implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            code: $attributes['code'],
-            message: $attributes['message'],
-            result: self::hydrateResult($attributes['result']),
+            code: $attributes['code'] ?? throw self::missing('code'),
+            message: $attributes['message'] ?? throw self::missing('message'),
+            result: self::hydrateResult(($attributes['result'] ?? throw self::missing('result'))),
         );
     }
 
@@ -65,20 +65,16 @@ final class EmailResponse implements ResponseContract
      */
     private static function hydrateResult(array $value): Email|UnknownEmail
     {
-        if (self::matches($value, ['result' => ['deliverable', 'not_deliverable']], ['result', 'deliverable', 'disposable', 'free', 'role', 'catchall', 'suggestions'])) {
-            /** @var EmailArray $variant */
-            $variant = $value;
-
-            return Email::from($variant);
-        }
-
-        if (self::matches($value, ['result' => ['unknown'], 'deliverable' => [null], 'disposable' => [null], 'free' => [null], 'role' => [null], 'catchall' => [null]], ['result', 'deliverable', 'disposable', 'free', 'role', 'catchall', 'suggestions'])) {
+        if (self::matches($value, ['result' => ['unknown']], [])) {
             /** @var UnknownEmailArray $variant */
             $variant = $value;
 
             return UnknownEmail::from($variant);
         }
 
-        throw new \UnexpectedValueException('The response matches no known variant of Email, UnknownEmail.');
+        /** @var EmailArray $variant */
+        $variant = $value;
+
+        return Email::from($variant);
     }
 }

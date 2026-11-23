@@ -50,10 +50,10 @@ final class PlaceSuggestion implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            id: $attributes['id'],
-            name: $attributes['name'],
-            descriptiveName: $attributes['descriptive_name'],
-            countryIso: $attributes['country_iso'],
+            id: $attributes['id'] ?? throw self::missing('id'),
+            name: $attributes['name'] ?? throw self::missing('name'),
+            descriptiveName: $attributes['descriptive_name'] ?? throw self::missing('descriptive_name'),
+            countryIso: $attributes['country_iso'] ?? throw self::missing('country_iso'),
         );
     }
 

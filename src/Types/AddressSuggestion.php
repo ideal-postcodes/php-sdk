@@ -27,7 +27,7 @@ final class AddressSuggestion implements ResponseContract
 
     private function __construct(
         /**
-         * Global unique internally generated identifier for an address
+         * Globally unique internally generated identifier for an address
          */
         public readonly string $id,
         /**
@@ -48,9 +48,9 @@ final class AddressSuggestion implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            id: $attributes['id'],
-            suggestion: $attributes['suggestion'],
-            urls: $attributes['urls'],
+            id: $attributes['id'] ?? throw self::missing('id'),
+            suggestion: $attributes['suggestion'] ?? throw self::missing('suggestion'),
+            urls: $attributes['urls'] ?? throw self::missing('urls'),
         );
     }
 

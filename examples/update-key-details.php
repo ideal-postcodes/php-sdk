@@ -8,7 +8,7 @@ require __DIR__.'/../vendor/autoload.php';
 
 $client = IdealPostcodes::client('ak_test', 'uk_test');
 
-$response = $client->keys()->updateDetails('ak_test', [
+$response = $client->updateKeyDetails('ak_test', [
     'name' => 'Checkout',
     'allowed_urls' => ['https://www.example.com'],
 ]);

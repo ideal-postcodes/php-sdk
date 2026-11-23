@@ -42,10 +42,10 @@ final class AddressResult implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            hits: array_map(static fn ($item) => AddressListItem::from($item), $attributes['hits']),
-            total: $attributes['total'],
-            limit: $attributes['limit'],
-            page: $attributes['page'],
+            hits: array_map(static fn ($item) => AddressListItem::from($item), ($attributes['hits'] ?? throw self::missing('hits'))),
+            total: $attributes['total'] ?? throw self::missing('total'),
+            limit: $attributes['limit'] ?? throw self::missing('limit'),
+            page: $attributes['page'] ?? throw self::missing('page'),
         );
     }
 

@@ -6,107 +6,39 @@ namespace IdealPostcodes;
 
 use IdealPostcodes\Contracts\ClientContract;
 use IdealPostcodes\Contracts\TransporterContract;
-use IdealPostcodes\Resources\Addresses;
-use IdealPostcodes\Resources\Autocomplete;
-use IdealPostcodes\Resources\Configs;
-use IdealPostcodes\Resources\Emails;
-use IdealPostcodes\Resources\Keys;
-use IdealPostcodes\Resources\Licensees;
-use IdealPostcodes\Resources\PhoneNumbers;
-use IdealPostcodes\Resources\Places;
-use IdealPostcodes\Resources\Postcodes;
+use IdealPostcodes\Exceptions\ApiException;
 
+/**
+ * One method per API operation, generated from the spec into the
+ * `Operations` trait, plus the `lookup()` convenience.
+ *
+ * @phpstan-import-type PostcodesParams from Params
+ */
 final class Client implements ClientContract
 {
+    use Operations;
+
     public function __construct(private readonly TransporterContract $transporter) {}
 
     /**
-     * Addresses at a postcode.
+     * The addresses at a postcode. An unknown postcode returns no addresses
+     * and the API's closest matching postcodes instead of throwing. Other
+     * errors still throw.
+     *
+     * @param  PostcodesParams  $params
      *
      * @see https://docs.ideal-postcodes.co.uk/docs/sdks/php/postcode-lookup
      */
-    public function postcodes(): Postcodes
+    public function lookup(string $postcode, array $params = []): PostcodeLookup
     {
-        return new Postcodes($this->transporter);
-    }
+        try {
+            return PostcodeLookup::found($this->postcodes($postcode, $params));
+        } catch (ApiException $exception) {
+            if ($exception->getCode() !== 4040) {
+                throw $exception;
+            }
 
-    /**
-     * Address search and address cleanse.
-     *
-     * @see https://docs.ideal-postcodes.co.uk/docs/sdks/php/endpoints
-     */
-    public function addresses(): Addresses
-    {
-        return new Addresses($this->transporter);
-    }
-
-    /**
-     * Address autocomplete: find suggestions, then resolve one to a full address.
-     *
-     * @see https://docs.ideal-postcodes.co.uk/docs/sdks/php/endpoints
-     */
-    public function autocomplete(): Autocomplete
-    {
-        return new Autocomplete($this->transporter);
-    }
-
-    /**
-     * Place search: find suggestions, then resolve one to a full place.
-     *
-     * @see https://docs.ideal-postcodes.co.uk/docs/sdks/php/endpoints
-     */
-    public function places(): Places
-    {
-        return new Places($this->transporter);
-    }
-
-    /**
-     * Email validation.
-     *
-     * @see https://docs.ideal-postcodes.co.uk/docs/sdks/php/endpoints
-     */
-    public function emails(): Emails
-    {
-        return new Emails($this->transporter);
-    }
-
-    /**
-     * Phone number validation.
-     *
-     * @see https://docs.ideal-postcodes.co.uk/docs/sdks/php/endpoints
-     */
-    public function phoneNumbers(): PhoneNumbers
-    {
-        return new PhoneNumbers($this->transporter);
-    }
-
-    /**
-     * API key availability, details, usage and logs.
-     *
-     * @see https://docs.ideal-postcodes.co.uk/docs/sdks/php/endpoints
-     */
-    public function keys(): Keys
-    {
-        return new Keys($this->transporter);
-    }
-
-    /**
-     * Licensees of a sublicensed key.
-     *
-     * @see https://docs.ideal-postcodes.co.uk/docs/sdks/php/endpoints
-     */
-    public function licensees(): Licensees
-    {
-        return new Licensees($this->transporter);
-    }
-
-    /**
-     * Named configuration payloads stored against a key.
-     *
-     * @see https://docs.ideal-postcodes.co.uk/docs/sdks/php/endpoints
-     */
-    public function configs(): Configs
-    {
-        return new Configs($this->transporter);
+            return PostcodeLookup::notFound($exception);
+        }
     }
 }

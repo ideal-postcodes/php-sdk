@@ -64,12 +64,12 @@ final class InvalidPhoneNumber implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            valid: $attributes['valid'],
-            nationalFormat: $attributes['national_format'],
-            internationalFormat: $attributes['international_format'],
-            isoCountry: $attributes['iso_country'],
-            isoCountry2: $attributes['iso_country_2'],
-            country: $attributes['country'],
+            valid: $attributes['valid'] ?? throw self::missing('valid'),
+            nationalFormat: $attributes['national_format'] ?? null,
+            internationalFormat: $attributes['international_format'] ?? null,
+            isoCountry: $attributes['iso_country'] ?? null,
+            isoCountry2: $attributes['iso_country_2'] ?? null,
+            country: $attributes['country'] ?? null,
             currentCarrier: $attributes['current_carrier'] ?? null,
             originalCarrier: $attributes['original_carrier'] ?? null,
         );

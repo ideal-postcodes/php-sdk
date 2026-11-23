@@ -19,9 +19,9 @@ final readonly class Credentials
     /**
      * The `Authorization` header value for an operation, or null when it needs none.
      *
-     * The API accepts the key as `Authorization: api_key="…"` and the Management
-     * Key as `Authorization: user_token="…"`. Sending each only to the
-     * operations that declare it keeps the Management Key off address traffic.
+     * Each key goes as `Authorization: Bearer …`, the form the spec documents.
+     * Sending each only to the operations that declare it keeps the
+     * Management Key off address traffic.
      *
      * @throws MissingManagementKey when the operation needs a Management Key and none is set
      */
@@ -29,11 +29,8 @@ final readonly class Credentials
     {
         return match ($auth) {
             Auth::None => null,
-            Auth::ApiKey => sprintf('api_key="%s"', $this->apiKey),
-            Auth::ManagementKey => sprintf(
-                'user_token="%s"',
-                $this->managementKey ?? throw new MissingManagementKey(),
-            ),
+            Auth::ApiKey => 'Bearer '.$this->apiKey,
+            Auth::ManagementKey => 'Bearer '.($this->managementKey ?? throw new MissingManagementKey()),
         };
     }
 }

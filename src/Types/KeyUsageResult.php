@@ -51,10 +51,10 @@ final class KeyUsageResult implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            start: $attributes['start'],
-            end: $attributes['end'],
-            total: $attributes['total'],
-            dailyCount: array_map(static fn ($item) => KeyUsageDay::from($item), $attributes['dailyCount']),
+            start: $attributes['start'] ?? throw self::missing('start'),
+            end: $attributes['end'] ?? throw self::missing('end'),
+            total: $attributes['total'] ?? throw self::missing('total'),
+            dailyCount: array_map(static fn ($item) => KeyUsageDay::from($item), ($attributes['dailyCount'] ?? throw self::missing('dailyCount'))),
         );
     }
 

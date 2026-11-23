@@ -44,9 +44,9 @@ final class ApiKeyCurrentPurchase implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            expires: $attributes['expires'],
-            purchased: $attributes['purchased'],
-            consumed: $attributes['consumed'],
+            expires: $attributes['expires'] ?? null,
+            purchased: $attributes['purchased'] ?? throw self::missing('purchased'),
+            consumed: $attributes['consumed'] ?? throw self::missing('consumed'),
         );
     }
 

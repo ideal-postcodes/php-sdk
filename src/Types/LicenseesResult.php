@@ -17,7 +17,7 @@ use IdealPostcodes\Contracts\ResponseContract;
  * List of licensees
  *
  * @phpstan-import-type LicenseeArray from Licensee
- * @phpstan-type LicenseesResultArray array{licensees?: list<LicenseeArray>, hasMore?: bool}
+ * @phpstan-type LicenseesResultArray array{licensees: list<LicenseeArray>, hasMore: bool}
  *
  * @implements ResponseContract<LicenseesResultArray>
  */
@@ -28,13 +28,13 @@ final class LicenseesResult implements ResponseContract
 
     private function __construct(
         /**
-         * @var list<Licensee>|null
+         * @var list<Licensee>
          */
-        public readonly ?array $licensees,
+        public readonly array $licensees,
         /**
          * Returns true if there are more licensees listed after the maximum number of results as implied by `limit`
          */
-        public readonly ?bool $hasMore,
+        public readonly bool $hasMore,
     ) {}
 
     /**
@@ -43,25 +43,16 @@ final class LicenseesResult implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            licensees: isset($attributes['licensees']) ? array_map(static fn ($item) => Licensee::from($item), $attributes['licensees']) : null,
-            hasMore: $attributes['hasMore'] ?? null,
+            licensees: array_map(static fn ($item) => Licensee::from($item), ($attributes['licensees'] ?? throw self::missing('licensees'))),
+            hasMore: $attributes['hasMore'] ?? throw self::missing('hasMore'),
         );
     }
 
     public function toArray(): array
     {
-        $array = [
-
+        return [
+            'licensees' => array_map(static fn ($item) => $item->toArray(), $this->licensees),
+            'hasMore' => $this->hasMore,
         ];
-
-        if ($this->licensees !== null) {
-            $array['licensees'] = array_map(static fn ($item) => $item->toArray(), $this->licensees);
-        }
-
-        if ($this->hasMore !== null) {
-            $array['hasMore'] = $this->hasMore;
-        }
-
-        return $array;
     }
 }

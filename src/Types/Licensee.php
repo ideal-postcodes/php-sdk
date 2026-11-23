@@ -14,10 +14,8 @@ use IdealPostcodes\Contracts\ResponseContract;
 /**
  * Licensee
  *
- * Licensee object which can be defined by user
- *
  * @phpstan-import-type LicenseeDailyUsageArray from LicenseeDailyUsage
- * @phpstan-type LicenseeArray array{name: string, address: string, postcode: string, whitelist: list<string>, daily: LicenseeDailyUsageArray, id: string, key: string, createdAt: string}
+ * @phpstan-type LicenseeArray array{id: string, key: string, createdAt: string, name: string, address: string, postcode: string, whitelist: list<string>, daily: LicenseeDailyUsageArray}
  *
  * @implements ResponseContract<LicenseeArray>
  */
@@ -27,6 +25,18 @@ final class Licensee implements ResponseContract
     use ArrayAccessible;
 
     private function __construct(
+        /**
+         * An immutable ID provided for every licensee. Primarily used for paginated list requests.
+         */
+        public readonly string $id,
+        /**
+         * Uniquely identifies a licensee for a key.
+         */
+        public readonly string $key,
+        /**
+         * Timestamp for when the licensee was created
+         */
+        public readonly string $createdAt,
         /**
          * Licensee individual or organisation name
          */
@@ -46,18 +56,6 @@ final class Licensee implements ResponseContract
          */
         public readonly array $whitelist,
         public readonly LicenseeDailyUsage $daily,
-        /**
-         * An immutable ID provided for every licensee. Primarily used for paginated list requests.
-         */
-        public readonly string $id,
-        /**
-         * Uniquely identifies a licensee for a key.
-         */
-        public readonly string $key,
-        /**
-         * Timestamp for when the licensee was created
-         */
-        public readonly string $createdAt,
     ) {}
 
     /**
@@ -66,28 +64,28 @@ final class Licensee implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            name: $attributes['name'],
-            address: $attributes['address'],
-            postcode: $attributes['postcode'],
-            whitelist: $attributes['whitelist'],
-            daily: LicenseeDailyUsage::from($attributes['daily']),
-            id: $attributes['id'],
-            key: $attributes['key'],
-            createdAt: $attributes['createdAt'],
+            id: $attributes['id'] ?? throw self::missing('id'),
+            key: $attributes['key'] ?? throw self::missing('key'),
+            createdAt: $attributes['createdAt'] ?? throw self::missing('createdAt'),
+            name: $attributes['name'] ?? throw self::missing('name'),
+            address: $attributes['address'] ?? throw self::missing('address'),
+            postcode: $attributes['postcode'] ?? throw self::missing('postcode'),
+            whitelist: $attributes['whitelist'] ?? throw self::missing('whitelist'),
+            daily: LicenseeDailyUsage::from(($attributes['daily'] ?? throw self::missing('daily'))),
         );
     }
 
     public function toArray(): array
     {
         return [
+            'id' => $this->id,
+            'key' => $this->key,
+            'createdAt' => $this->createdAt,
             'name' => $this->name,
             'address' => $this->address,
             'postcode' => $this->postcode,
             'whitelist' => $this->whitelist,
             'daily' => $this->daily->toArray(),
-            'id' => $this->id,
-            'key' => $this->key,
-            'createdAt' => $this->createdAt,
         ];
     }
 }

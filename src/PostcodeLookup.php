@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace IdealPostcodes\Responses;
+namespace IdealPostcodes;
 
 use IdealPostcodes\Exceptions\ApiException;
+use IdealPostcodes\Responses\PostcodeResponse;
 use IdealPostcodes\Types\AddressListItem;
 
 /**

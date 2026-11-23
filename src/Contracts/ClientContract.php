@@ -4,33 +4,18 @@ declare(strict_types=1);
 
 namespace IdealPostcodes\Contracts;
 
-use IdealPostcodes\Resources\Addresses;
-use IdealPostcodes\Resources\Autocomplete;
-use IdealPostcodes\Resources\Configs;
-use IdealPostcodes\Resources\Emails;
-use IdealPostcodes\Resources\Keys;
-use IdealPostcodes\Resources\Licensees;
-use IdealPostcodes\Resources\PhoneNumbers;
-use IdealPostcodes\Resources\Places;
-use IdealPostcodes\Resources\Postcodes;
+use IdealPostcodes\Params;
+use IdealPostcodes\PostcodeLookup;
 
-interface ClientContract
+/**
+ * @phpstan-import-type PostcodesParams from Params
+ */
+interface ClientContract extends OperationsContract
 {
-    public function postcodes(): Postcodes;
-
-    public function addresses(): Addresses;
-
-    public function autocomplete(): Autocomplete;
-
-    public function places(): Places;
-
-    public function emails(): Emails;
-
-    public function phoneNumbers(): PhoneNumbers;
-
-    public function keys(): Keys;
-
-    public function licensees(): Licensees;
-
-    public function configs(): Configs;
+    /**
+     * The addresses at a postcode, or the API's suggestions when it is not found.
+     *
+     * @param  PostcodesParams  $params
+     */
+    public function lookup(string $postcode, array $params = []): PostcodeLookup;
 }

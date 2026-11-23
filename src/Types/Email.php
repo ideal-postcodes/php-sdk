@@ -62,13 +62,13 @@ final class Email implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            result: $attributes['result'],
-            deliverable: $attributes['deliverable'],
-            disposable: $attributes['disposable'],
-            free: $attributes['free'],
-            role: $attributes['role'],
-            catchall: $attributes['catchall'],
-            suggestions: $attributes['suggestions'],
+            result: $attributes['result'] ?? throw self::missing('result'),
+            deliverable: $attributes['deliverable'] ?? throw self::missing('deliverable'),
+            disposable: $attributes['disposable'] ?? throw self::missing('disposable'),
+            free: $attributes['free'] ?? throw self::missing('free'),
+            role: $attributes['role'] ?? throw self::missing('role'),
+            catchall: $attributes['catchall'] ?? throw self::missing('catchall'),
+            suggestions: $attributes['suggestions'] ?? throw self::missing('suggestions'),
         );
     }
 

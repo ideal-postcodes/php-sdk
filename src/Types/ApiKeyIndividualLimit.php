@@ -36,7 +36,7 @@ final class ApiKeyIndividualLimit implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            limit: $attributes['limit'],
+            limit: $attributes['limit'] ?? null,
         );
     }
 

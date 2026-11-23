@@ -46,9 +46,9 @@ final class ApiKeyUsageResponse implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            result: KeyUsageResult::from($attributes['result']),
-            code: $attributes['code'],
-            message: $attributes['message'],
+            result: KeyUsageResult::from(($attributes['result'] ?? throw self::missing('result'))),
+            code: $attributes['code'] ?? throw self::missing('code'),
+            message: $attributes['message'] ?? throw self::missing('message'),
         );
     }
 

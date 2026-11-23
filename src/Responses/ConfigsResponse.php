@@ -46,9 +46,9 @@ final class ConfigsResponse implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            result: ConfigsResult::from($attributes['result']),
-            message: $attributes['message'],
-            code: $attributes['code'],
+            result: ConfigsResult::from(($attributes['result'] ?? throw self::missing('result'))),
+            message: $attributes['message'] ?? throw self::missing('message'),
+            code: $attributes['code'] ?? throw self::missing('code'),
         );
     }
 

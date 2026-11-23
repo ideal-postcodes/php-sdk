@@ -6,36 +6,39 @@ namespace IdealPostcodes\ValueObjects;
 
 use IdealPostcodes\Auth;
 use IdealPostcodes\Credentials;
-use IdealPostcodes\Operation;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 
 /**
- * One call to one operation: path parameters, query parameters and an optional JSON body.
+ * One call to one operation: its HTTP method, path template and credential,
+ * plus path parameters, query parameters and an optional JSON body.
  *
  * @internal
  */
 final readonly class Payload
 {
     /**
+     * @param  string  $template  path template, such as `/postcodes/{postcode}`
      * @param  array<string, string|int>  $path
      * @param  array<string, mixed>  $query
      * @param  array<string, mixed>|null  $body
      */
     public function __construct(
-        public Operation $operation,
+        public string $method,
+        public string $template,
+        public Auth $auth,
         public array $path = [],
         public array $query = [],
         public ?array $body = null,
     ) {}
 
     /**
-     * The operation path with its parameters filled in, such as `/postcodes/SW1A%202AA`.
+     * The operation path with its parameters filled in, such as `/postcodes/BR8%207RE`.
      */
     public function uriPath(): string
     {
-        $path = $this->operation->path();
+        $path = $this->template;
 
         foreach ($this->path as $name => $value) {
             $path = str_replace('{'.$name.'}', rawurlencode((string) $value), $path);
@@ -90,21 +93,21 @@ final readonly class Payload
             $uri .= '?'.http_build_query($query, '', '&', PHP_QUERY_RFC3986);
         }
 
-        $request = $requestFactory->createRequest($this->operation->method(), $uri);
+        $request = $requestFactory->createRequest($this->method, $uri);
 
         foreach ($headers as $name => $value) {
             $request = $request->withHeader($name, $value);
         }
 
         // A per-call `api_key` or `user_token` in the query takes the place of the header.
-        $credentialInQuery = match ($this->operation->auth()) {
+        $credentialInQuery = match ($this->auth) {
             Auth::ApiKey => isset($query['api_key']),
             Auth::ManagementKey => isset($query['user_token']),
             Auth::None => true,
         };
 
         if (! $credentialInQuery) {
-            $authorization = $credentials->authorization($this->operation->auth());
+            $authorization = $credentials->authorization($this->auth);
 
             if ($authorization !== null) {
                 $request = $request->withHeader('Authorization', $authorization);

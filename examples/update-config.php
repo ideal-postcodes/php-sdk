@@ -8,7 +8,7 @@ require __DIR__.'/../vendor/autoload.php';
 
 $client = IdealPostcodes::client('ak_test', 'uk_test');
 
-$response = $client->configs()->update('ak_test', 'woocommerce', [
+$response = $client->updateConfig('ak_test', 'woocommerce', [
     'payload' => json_encode(['removeOrganisation' => true], JSON_THROW_ON_ERROR),
 ]);
 

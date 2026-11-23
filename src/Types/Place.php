@@ -28,7 +28,7 @@ final class Place implements ResponseContract
 
     private function __construct(
         /**
-         * Global unique internally generated identifier for a place
+         * Globally unique internally generated identifier for a place
          */
         public readonly string $id,
         /**
@@ -77,14 +77,14 @@ final class Place implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            id: $attributes['id'],
-            dataset: $attributes['dataset'],
-            name: $attributes['name'],
-            descriptiveName: $attributes['descriptive_name'],
-            countryIso: $attributes['country_iso'],
-            language: $attributes['language'],
-            longitude: $attributes['longitude'],
-            latitude: $attributes['latitude'],
+            id: $attributes['id'] ?? throw self::missing('id'),
+            dataset: $attributes['dataset'] ?? throw self::missing('dataset'),
+            name: $attributes['name'] ?? throw self::missing('name'),
+            descriptiveName: $attributes['descriptive_name'] ?? throw self::missing('descriptive_name'),
+            countryIso: $attributes['country_iso'] ?? throw self::missing('country_iso'),
+            language: $attributes['language'] ?? throw self::missing('language'),
+            longitude: $attributes['longitude'] ?? throw self::missing('longitude'),
+            latitude: $attributes['latitude'] ?? throw self::missing('latitude'),
             native: isset($attributes['native']) ? self::hydrateNative($attributes['native']) : null,
         );
     }
@@ -116,7 +116,7 @@ final class Place implements ResponseContract
      */
     private static function hydrateNative(array $value): GeonamesPlace|array
     {
-        if (self::matches($value, ['dataset' => ['geonames'], 'feature_class' => ['A', 'P']], ['id', 'dataset', 'geonameid', 'name', 'asciiname', 'alternatenames', 'language', 'latitude', 'longitude', 'feature_class', 'feature_code', 'country_code', 'country_iso', 'cc2', 'admin1_name', 'admin1_geonameid', 'admin1_code', 'admin2_name', 'admin2_geonameid', 'admin2_code', 'admin3_code', 'admin4_code', 'population', 'elevation', 'dem', 'timezone', 'modification_date'])) {
+        if (self::matches($value, ['dataset' => ['geonames']], ['id', 'dataset', 'geonameid', 'name', 'asciiname', 'alternatenames', 'language', 'latitude', 'longitude', 'feature_class', 'feature_code', 'country_code', 'country_iso', 'cc2', 'admin1_name', 'admin1_geonameid', 'admin1_code', 'admin2_name', 'admin2_geonameid', 'admin2_code', 'admin3_code', 'admin4_code', 'population', 'elevation', 'dem', 'timezone', 'modification_date'])) {
             /** @var GeonamesPlaceArray $variant */
             $variant = $value;
 

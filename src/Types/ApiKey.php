@@ -49,9 +49,9 @@ final class ApiKey implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            contexts: array_map(static fn ($item) => AvailableContext::from($item), $attributes['contexts']),
-            context: $attributes['context'],
-            available: $attributes['available'],
+            contexts: array_map(static fn ($item) => AvailableContext::from($item), ($attributes['contexts'] ?? throw self::missing('contexts'))),
+            context: $attributes['context'] ?? throw self::missing('context'),
+            available: $attributes['available'] ?? throw self::missing('available'),
         );
     }
 

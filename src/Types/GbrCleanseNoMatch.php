@@ -78,17 +78,17 @@ final class GbrCleanseNoMatch implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            query: $attributes['query'],
-            match: $attributes['match'],
-            count: $attributes['count'],
-            fit: $attributes['fit'],
-            confidence: $attributes['confidence'],
-            organisationMatch: $attributes['organisation_match'],
-            premiseMatch: $attributes['premise_match'],
-            postcodeMatch: $attributes['postcode_match'],
-            thoroughfareMatch: $attributes['thoroughfare_match'],
-            localityMatch: $attributes['locality_match'],
-            postTownMatch: $attributes['post_town_match'],
+            query: $attributes['query'] ?? throw self::missing('query'),
+            match: $attributes['match'] ?? null,
+            count: $attributes['count'] ?? throw self::missing('count'),
+            fit: $attributes['fit'] ?? throw self::missing('fit'),
+            confidence: $attributes['confidence'] ?? throw self::missing('confidence'),
+            organisationMatch: $attributes['organisation_match'] ?? throw self::missing('organisation_match'),
+            premiseMatch: $attributes['premise_match'] ?? throw self::missing('premise_match'),
+            postcodeMatch: $attributes['postcode_match'] ?? throw self::missing('postcode_match'),
+            thoroughfareMatch: $attributes['thoroughfare_match'] ?? throw self::missing('thoroughfare_match'),
+            localityMatch: $attributes['locality_match'] ?? throw self::missing('locality_match'),
+            postTownMatch: $attributes['post_town_match'] ?? throw self::missing('post_town_match'),
         );
     }
 

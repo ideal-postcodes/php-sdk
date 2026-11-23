@@ -43,9 +43,9 @@ final class AddressResponse implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            code: $attributes['code'],
-            message: $attributes['message'],
-            result: AddressResult::from($attributes['result']),
+            code: $attributes['code'] ?? throw self::missing('code'),
+            message: $attributes['message'] ?? throw self::missing('message'),
+            result: AddressResult::from(($attributes['result'] ?? throw self::missing('result'))),
         );
     }
 

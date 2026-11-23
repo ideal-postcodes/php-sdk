@@ -46,9 +46,9 @@ final class GbrResolveAddressResponse implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            code: $attributes['code'],
-            message: $attributes['message'],
-            result: Address::from($attributes['result']),
+            code: $attributes['code'] ?? throw self::missing('code'),
+            message: $attributes['message'] ?? throw self::missing('message'),
+            result: Address::from(($attributes['result'] ?? throw self::missing('result'))),
         );
     }
 

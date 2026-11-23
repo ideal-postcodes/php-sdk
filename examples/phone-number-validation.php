@@ -9,7 +9,7 @@ require __DIR__.'/../vendor/autoload.php';
 
 $client = IdealPostcodes::client('ak_test');
 
-$response = $client->phoneNumbers()->validate('+44 20 7112 8019');
+$response = $client->phoneNumberValidation(['query' => '+44 20 7112 8019']);
 
 $result = $response->result;
 

@@ -213,7 +213,7 @@ final class AbpAddress implements ResponseContract
          */
         public readonly ?string $dpaEntryDate,
         /**
-         * Current AddressBase classification code (e.g. `RD` residential, `CR` commercial retail). Top-level categories: `R` Residential, `C` Commercial, `L` Land, `M` Military, `O` Other, `P` Parent shell, `U` Unclassified, `X` Dual use, `Z` Object of interest. NULL when no current classification row exists for the UPRN.
+         * Current AddressBase classification code, passed through verbatim at whatever level the custodian recorded. Usually tertiary (e.g. `RD03` semi-detached, `RD04` terraced, `RD06` self-contained flat, `CR01` retail), but can be quaternary (`LP03PA`), secondary (`RD`) or primary (`C`). Match on prefix rather than equality. Top-level categories: `R` Residential, `C` Commercial, `L` Land, `M` Military, `O` Other, `P` Parent shell, `U` Unclassified, `X` Dual use, `Z` Object of interest. NULL when no current classification row exists for the UPRN.
          */
         public readonly ?string $classificationCode,
         /**
@@ -508,21 +508,21 @@ final class AbpAddress implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            uprn: $attributes['uprn'],
+            uprn: $attributes['uprn'] ?? throw self::missing('uprn'),
             parentUprn: $attributes['parent_uprn'] ?? null,
-            logicalStatus: $attributes['logical_status'],
+            logicalStatus: $attributes['logical_status'] ?? throw self::missing('logical_status'),
             blpuState: $attributes['blpu_state'] ?? null,
             blpuStateDate: $attributes['blpu_state_date'] ?? null,
-            country: $attributes['country'],
-            latitude: $attributes['latitude'],
-            longitude: $attributes['longitude'],
-            xCoordinate: $attributes['x_coordinate'],
-            yCoordinate: $attributes['y_coordinate'],
+            country: $attributes['country'] ?? throw self::missing('country'),
+            latitude: $attributes['latitude'] ?? throw self::missing('latitude'),
+            longitude: $attributes['longitude'] ?? throw self::missing('longitude'),
+            xCoordinate: $attributes['x_coordinate'] ?? throw self::missing('x_coordinate'),
+            yCoordinate: $attributes['y_coordinate'] ?? throw self::missing('y_coordinate'),
             rpc: $attributes['rpc'] ?? null,
-            localCustodianCode: $attributes['local_custodian_code'],
-            addressbasePostal: $attributes['addressbase_postal'],
-            postcodeLocator: $attributes['postcode_locator'],
-            multiOccCount: $attributes['multi_occ_count'],
+            localCustodianCode: $attributes['local_custodian_code'] ?? throw self::missing('local_custodian_code'),
+            addressbasePostal: $attributes['addressbase_postal'] ?? throw self::missing('addressbase_postal'),
+            postcodeLocator: $attributes['postcode_locator'] ?? throw self::missing('postcode_locator'),
+            multiOccCount: $attributes['multi_occ_count'] ?? throw self::missing('multi_occ_count'),
             blpuStartDate: $attributes['blpu_start_date'] ?? null,
             blpuEndDate: $attributes['blpu_end_date'] ?? null,
             blpuLastUpdateDate: $attributes['blpu_last_update_date'] ?? null,
@@ -539,7 +539,7 @@ final class AbpAddress implements ResponseContract
             doubleDependentLocality: $attributes['double_dependent_locality'] ?? null,
             dependentLocality: $attributes['dependent_locality'] ?? null,
             postTown: $attributes['post_town'] ?? null,
-            postcode: $attributes['postcode'],
+            postcode: $attributes['postcode'] ?? throw self::missing('postcode'),
             postcodeType: $attributes['postcode_type'] ?? null,
             deliveryPointSuffix: $attributes['delivery_point_suffix'] ?? null,
             poBoxNumber: $attributes['po_box_number'] ?? null,
@@ -620,10 +620,10 @@ final class AbpAddress implements ResponseContract
             ndrRef: $attributes['ndr_ref'] ?? null,
             onsWardCode: $attributes['ons_ward_code'] ?? null,
             onsParishCode: $attributes['ons_parish_code'] ?? null,
-            id: $attributes['id'],
-            dataset: $attributes['dataset'],
-            countryIso: $attributes['country_iso'],
-            suggestionLine: $attributes['suggestion_line'],
+            id: $attributes['id'] ?? throw self::missing('id'),
+            dataset: $attributes['dataset'] ?? throw self::missing('dataset'),
+            countryIso: $attributes['country_iso'] ?? throw self::missing('country_iso'),
+            suggestionLine: $attributes['suggestion_line'] ?? throw self::missing('suggestion_line'),
         );
     }
 

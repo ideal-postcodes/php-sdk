@@ -45,9 +45,9 @@ final class PhoneNumberResponse implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            code: $attributes['code'],
-            message: $attributes['message'],
-            result: self::hydrateResult($attributes['result']),
+            code: $attributes['code'] ?? throw self::missing('code'),
+            message: $attributes['message'] ?? throw self::missing('message'),
+            result: self::hydrateResult(($attributes['result'] ?? throw self::missing('result'))),
         );
     }
 
@@ -65,20 +65,16 @@ final class PhoneNumberResponse implements ResponseContract
      */
     private static function hydrateResult(array $value): PhoneNumber|InvalidPhoneNumber
     {
-        if (self::matches($value, ['valid' => [true]], ['valid', 'national_format', 'international_format', 'iso_country', 'iso_country_2', 'country', 'current_carrier', 'original_carrier'])) {
-            /** @var PhoneNumberArray $variant */
-            $variant = $value;
-
-            return PhoneNumber::from($variant);
-        }
-
-        if (self::matches($value, ['valid' => [false], 'national_format' => [null], 'international_format' => [null], 'iso_country' => [null], 'iso_country_2' => [null], 'country' => [null]], ['valid', 'national_format', 'international_format', 'iso_country', 'iso_country_2', 'country'])) {
+        if (self::matches($value, ['valid' => [false]], [])) {
             /** @var InvalidPhoneNumberArray $variant */
             $variant = $value;
 
             return InvalidPhoneNumber::from($variant);
         }
 
-        throw new \UnexpectedValueException('The response matches no known variant of PhoneNumber, InvalidPhoneNumber.');
+        /** @var PhoneNumberArray $variant */
+        $variant = $value;
+
+        return PhoneNumber::from($variant);
     }
 }

@@ -33,7 +33,7 @@ final class DeletedLicensee implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            deleted: $attributes['deleted'],
+            deleted: $attributes['deleted'] ?? throw self::missing('deleted'),
         );
     }
 

@@ -54,11 +54,11 @@ final class ApiKeyNotifications implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            emails: $attributes['emails'],
-            enabled: $attributes['enabled'],
-            balanceThreshold: $attributes['balance_threshold'],
-            noBalance: $attributes['no_balance'],
-            limitReached: $attributes['limit_reached'],
+            emails: $attributes['emails'] ?? throw self::missing('emails'),
+            enabled: $attributes['enabled'] ?? throw self::missing('enabled'),
+            balanceThreshold: $attributes['balance_threshold'] ?? null,
+            noBalance: $attributes['no_balance'] ?? throw self::missing('no_balance'),
+            limitReached: $attributes['limit_reached'] ?? throw self::missing('limit_reached'),
         );
     }
 

@@ -8,7 +8,7 @@ require __DIR__.'/../vendor/autoload.php';
 
 $client = IdealPostcodes::client('ak_test', 'uk_test');
 
-$response = $client->keys()->usage('ak_test', [
+$response = $client->keyUsage('ak_test', [
     'start' => strtotime('-7 days') * 1000,
     'end' => time() * 1000,
 ]);

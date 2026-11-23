@@ -45,9 +45,9 @@ final class CleanseResponse implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            code: $attributes['code'],
-            message: $attributes['message'],
-            result: self::hydrateResult($attributes['result']),
+            code: $attributes['code'] ?? throw self::missing('code'),
+            message: $attributes['message'] ?? throw self::missing('message'),
+            result: self::hydrateResult(($attributes['result'] ?? throw self::missing('result'))),
         );
     }
 
@@ -65,20 +65,16 @@ final class CleanseResponse implements ResponseContract
      */
     private static function hydrateResult(array $value): GbrCleanseMatch|GbrCleanseNoMatch
     {
-        if (self::matches($value, ['organisation_match' => ['FULL', 'PARTIAL', 'INCORRECT', 'MISSING', 'NA'], 'premise_match' => ['FULL', 'PARTIAL', 'INCORRECT', 'MISSING', 'NA'], 'postcode_match' => ['FULL', 'PARTIAL', 'INCORRECT', 'MISSING', 'NA'], 'thoroughfare_match' => ['FULL', 'PARTIAL', 'INCORRECT', 'MISSING', 'NA'], 'locality_match' => ['FULL', 'PARTIAL', 'INCORRECT', 'MISSING', 'NA'], 'post_town_match' => ['FULL', 'PARTIAL', 'INCORRECT', 'MISSING', 'NA']], ['query', 'match', 'count', 'fit', 'confidence', 'organisation_match', 'premise_match', 'postcode_match', 'thoroughfare_match', 'locality_match', 'post_town_match'])) {
-            /** @var GbrCleanseMatchArray $variant */
-            $variant = $value;
-
-            return GbrCleanseMatch::from($variant);
-        }
-
-        if (self::matches($value, ['match' => [null], 'count' => [0], 'fit' => [0], 'confidence' => [0], 'organisation_match' => ['NO_MATCH'], 'premise_match' => ['NO_MATCH'], 'postcode_match' => ['NO_MATCH'], 'thoroughfare_match' => ['NO_MATCH'], 'locality_match' => ['NO_MATCH'], 'post_town_match' => ['NO_MATCH']], ['query', 'match', 'count', 'fit', 'confidence', 'organisation_match', 'premise_match', 'postcode_match', 'thoroughfare_match', 'locality_match', 'post_town_match'])) {
+        if (self::matches($value, ['match' => [null]], [])) {
             /** @var GbrCleanseNoMatchArray $variant */
             $variant = $value;
 
             return GbrCleanseNoMatch::from($variant);
         }
 
-        throw new \UnexpectedValueException('The response matches no known variant of GbrCleanseMatch, GbrCleanseNoMatch.');
+        /** @var GbrCleanseMatchArray $variant */
+        $variant = $value;
+
+        return GbrCleanseMatch::from($variant);
     }
 }

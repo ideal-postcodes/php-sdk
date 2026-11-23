@@ -8,7 +8,7 @@ require __DIR__.'/../vendor/autoload.php';
 
 $client = IdealPostcodes::client('ak_test');
 
-$response = $client->autocomplete()->resolve('paf_23747771');
+$response = $client->resolveAddress('paf_2670849');
 
 $address = $response->result;
 

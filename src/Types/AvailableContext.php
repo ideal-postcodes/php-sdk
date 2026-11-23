@@ -52,11 +52,11 @@ final class AvailableContext implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            iso3: $attributes['iso_3'],
-            iso2: $attributes['iso_2'],
-            description: $attributes['description'],
-            emoji: $attributes['emoji'],
-            rgeo: $attributes['rgeo'],
+            iso3: $attributes['iso_3'] ?? throw self::missing('iso_3'),
+            iso2: $attributes['iso_2'] ?? throw self::missing('iso_2'),
+            description: $attributes['description'] ?? throw self::missing('description'),
+            emoji: $attributes['emoji'] ?? throw self::missing('emoji'),
+            rgeo: $attributes['rgeo'] ?? throw self::missing('rgeo'),
         );
     }
 

@@ -38,7 +38,7 @@ final class AutocompleteResult implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            hits: array_map(static fn ($item) => self::hydrateHit($item), $attributes['hits']),
+            hits: array_map(static fn ($item) => self::hydrateHit($item), ($attributes['hits'] ?? throw self::missing('hits'))),
         );
     }
 
@@ -61,13 +61,9 @@ final class AutocompleteResult implements ResponseContract
             return UkAddressSuggestion::from($variant);
         }
 
-        if (self::matches($value, [], ['id', 'suggestion', 'urls'])) {
-            /** @var AddressSuggestionArray $variant */
-            $variant = $value;
+        /** @var AddressSuggestionArray $variant */
+        $variant = $value;
 
-            return AddressSuggestion::from($variant);
-        }
-
-        throw new \UnexpectedValueException('The response matches no known variant of AddressSuggestion, UkAddressSuggestion.');
+        return AddressSuggestion::from($variant);
     }
 }

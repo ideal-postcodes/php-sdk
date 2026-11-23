@@ -50,10 +50,10 @@ final class Carrier implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            networkCode: $attributes['network_code'],
-            name: $attributes['name'],
-            country: $attributes['country'],
-            networkType: $attributes['network_type'],
+            networkCode: $attributes['network_code'] ?? null,
+            name: $attributes['name'] ?? null,
+            country: $attributes['country'] ?? null,
+            networkType: $attributes['network_type'] ?? null,
         );
     }
 

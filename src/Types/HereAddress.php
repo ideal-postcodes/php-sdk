@@ -36,7 +36,7 @@ final class HereAddress implements ResponseContract
 
     private function __construct(
         /**
-         * Global unique internally generated identifier for an address
+         * Globally unique internally generated identifier for an address
          */
         public readonly string $id,
         /**
@@ -141,33 +141,33 @@ final class HereAddress implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            id: $attributes['id'],
-            countryIso: $attributes['country_iso'],
-            dataset: $attributes['dataset'],
-            language: $attributes['language'],
-            line1: $attributes['line_1'],
-            line2: $attributes['line_2'],
-            line3: $attributes['line_3'],
-            line4: $attributes['line_4'],
-            line5: $attributes['line_5'],
-            address: $attributes['address'],
-            deliveryLatitude: $attributes['delivery_latitude'],
-            deliveryLongitude: $attributes['delivery_longitude'],
-            buildingName: $attributes['building_name'],
-            latitude: $attributes['latitude'],
-            longitude: $attributes['longitude'],
-            streetName: $attributes['street_name'],
-            postalCode: $attributes['postal_code'],
-            order1Name: $attributes['order1_name'],
-            order2Name: $attributes['order2_name'],
-            order8Name: $attributes['order8_name'],
-            builtupName: $attributes['builtup_name'],
-            poiName: $attributes['poi_name'],
-            buildingUnitName: $attributes['building_unit_name'],
-            levelName: $attributes['level_name'],
-            unitName: $attributes['unit_name'],
-            supplAddressInfo: $attributes['suppl_address_info'],
-            buildingGrpName: $attributes['building_grp_name'],
+            id: $attributes['id'] ?? throw self::missing('id'),
+            countryIso: $attributes['country_iso'] ?? throw self::missing('country_iso'),
+            dataset: $attributes['dataset'] ?? throw self::missing('dataset'),
+            language: $attributes['language'] ?? throw self::missing('language'),
+            line1: $attributes['line_1'] ?? throw self::missing('line_1'),
+            line2: $attributes['line_2'] ?? throw self::missing('line_2'),
+            line3: $attributes['line_3'] ?? throw self::missing('line_3'),
+            line4: $attributes['line_4'] ?? throw self::missing('line_4'),
+            line5: $attributes['line_5'] ?? throw self::missing('line_5'),
+            address: $attributes['address'] ?? throw self::missing('address'),
+            deliveryLatitude: $attributes['delivery_latitude'] ?? throw self::missing('delivery_latitude'),
+            deliveryLongitude: $attributes['delivery_longitude'] ?? throw self::missing('delivery_longitude'),
+            buildingName: $attributes['building_name'] ?? throw self::missing('building_name'),
+            latitude: $attributes['latitude'] ?? throw self::missing('latitude'),
+            longitude: $attributes['longitude'] ?? throw self::missing('longitude'),
+            streetName: $attributes['street_name'] ?? throw self::missing('street_name'),
+            postalCode: $attributes['postal_code'] ?? throw self::missing('postal_code'),
+            order1Name: $attributes['order1_name'] ?? throw self::missing('order1_name'),
+            order2Name: $attributes['order2_name'] ?? throw self::missing('order2_name'),
+            order8Name: $attributes['order8_name'] ?? throw self::missing('order8_name'),
+            builtupName: $attributes['builtup_name'] ?? throw self::missing('builtup_name'),
+            poiName: $attributes['poi_name'] ?? throw self::missing('poi_name'),
+            buildingUnitName: $attributes['building_unit_name'] ?? throw self::missing('building_unit_name'),
+            levelName: $attributes['level_name'] ?? throw self::missing('level_name'),
+            unitName: $attributes['unit_name'] ?? throw self::missing('unit_name'),
+            supplAddressInfo: $attributes['suppl_address_info'] ?? throw self::missing('suppl_address_info'),
+            buildingGrpName: $attributes['building_grp_name'] ?? throw self::missing('building_grp_name'),
         );
     }
 

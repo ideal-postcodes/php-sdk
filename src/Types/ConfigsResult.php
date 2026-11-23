@@ -39,7 +39,7 @@ final class ConfigsResult implements ResponseContract
     public static function from(array $attributes): self
     {
         return new self(
-            configs: array_map(static fn ($item) => Config::from($item), $attributes['configs']),
+            configs: array_map(static fn ($item) => Config::from($item), ($attributes['configs'] ?? throw self::missing('configs'))),
         );
     }
 
