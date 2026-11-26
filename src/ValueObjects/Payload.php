@@ -34,7 +34,7 @@ final readonly class Payload
     ) {}
 
     /**
-     * The operation path with its parameters filled in, such as `/postcodes/BR8%207RE`.
+     * The operation path with its parameters filled in and URL-encoded.
      */
     public function uriPath(): string
     {

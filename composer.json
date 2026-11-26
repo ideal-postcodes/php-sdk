@@ -64,7 +64,6 @@
         }
     },
     "scripts": {
-        "generate": "@php scripts/generate.php",
         "lint": "pint --test",
         "lint:fix": "pint",
         "test:types": [
